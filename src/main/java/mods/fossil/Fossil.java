@@ -192,7 +192,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3";
+    public static final String modversion = "1.6.4 Build 6.3.1 alpha";
 
     /*
      * Set mod state here
@@ -240,6 +240,10 @@ public class Fossil
     public static CreativeTabs tabFFigurines = new TabFFigurines(CreativeTabs.getNextID(), "Fossil Test");
 
     //public static WorldType fossil = new WorldTypeFossil(3, "Dino Test");
+    
+  //enchantments
+    public static Enchantment paleontology;
+    public static Enchantment archeology;
 
     //Blocks
     public static Block blockFossil;
@@ -438,6 +442,9 @@ public class Fossil
     public static int a_theKingID;
     public static int a_pigBossOnEarthID;
     
+    public static int e_archeologyID;
+    public static int e_paleontologyID;
+    
     //Blocks
     public static int blockFossilID;
     public static int blockSkullID;
@@ -633,10 +640,7 @@ public class Fossil
     static EnumArmorMaterial bone = EnumHelper.addArmorMaterial("Bone", 25, new int[] {2, 7, 6, 2}, 15);
     static EnumToolMaterial scarab = EnumHelper.addToolMaterial("Scarab", 3, 1861, 8.0F, 4.0F, 25);
     static EnumArmorMaterial scarabArmor = EnumHelper.addArmorMaterial("Scarab", 50, new int[]{3, 8, 6, 3}, 10);
-    static EnumArmorMaterial RELIC = EnumHelper.addArmorMaterial("Relic", 5, new int[]{1, 3, 2, 1}, 15);
-    
-    public static final Enchantment paleontology = new EnchantmentPaleontology(90, 17, EnumEnchantmentType.digger);
-    public static final Enchantment archeology = new EnchantmentArcheology(91, 17, EnumEnchantmentType.digger);   		
+    static EnumArmorMaterial RELIC = EnumHelper.addArmorMaterial("Relic", 5, new int[]{1, 3, 2, 1}, 15); 		
     
     @Mod.EventHandler
     public void PreInit(FMLPreInitializationEvent event)
@@ -666,6 +670,10 @@ public class Fossil
             a_iceAgeID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_ICEAGE, 5021).getInt();
             a_theKingID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_THEKING, 5022).getInt();
             a_pigBossOnEarthID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ACHIEVEMENT_PIGBOSS, 5023).getInt();
+            
+          //Enchantments
+            e_paleontologyID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ENCHANTMENT_PALEONTOLOGY, 90).getInt();
+            e_archeologyID = config.get(Configuration.CATEGORY_GENERAL, LocalizationStrings.ENCHANTMENT_ARCHEOLOGY, 91).getInt();
             
             //Blocks
             blockFossilID = config.getBlock(Configuration.CATEGORY_BLOCK, LocalizationStrings.BLOCK_FOSSIL_NAME, 3000).getInt();
@@ -907,6 +915,10 @@ public class Fossil
     public void Init(FMLInitializationEvent event)
     {
         LanguageRegistry.instance().addStringLocalization("itemGroup." + this.modid, "en_US", this.modid);
+        
+        paleontology = new EnchantmentPaleontology(e_paleontologyID, 17, EnumEnchantmentType.digger);
+        archeology = new EnchantmentArcheology(e_archeologyID, 17, EnumEnchantmentType.digger);
+        
         //Blocks
         skullLantern = new BlockFossilSkull(skullLanternID, true).setHardness(1.0F).setLightValue(0.9375F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.SKULL_LANTERN_NAME).setCreativeTab(this.tabFBlocks);
         blockanalyzerIdle = new BlockAnalyzer(blockanalyzerIdleID, false).setHardness(3.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName(LocalizationStrings.BLOCK_ANALYZER_IDLE_NAME).setCreativeTab(this.tabFBlocks);

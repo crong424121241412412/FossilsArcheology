@@ -413,7 +413,7 @@ public enum EnumDinoType
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Deinonychus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Ankylosaurus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Pachycephalosaurus);
-        TRex.FoodItemList.addItem(EnumDinoFoodItem.Gallimimus);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Gallimimus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         
         Pterosaur.setItems(Item.arrow);   //,			Fossil.rawPterosaur, 	Fossil.dnaPterosaur, 	Fossil.eggPterosaur);

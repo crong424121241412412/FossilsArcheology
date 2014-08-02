@@ -19,6 +19,7 @@ public class LocalizationStrings
 	
 	//Enchantments
 	public static final String ENCHANTMENT_PALEONTOLOGY = "paleontology";
+	public static final String ENCHANTMENT_ARCHEOLOGY = "archeology";
 	
     //Blocks
     public static final String BLOCK_FOSSIL_NAME = "fossil";

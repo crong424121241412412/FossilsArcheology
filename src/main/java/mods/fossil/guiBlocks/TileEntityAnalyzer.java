@@ -392,7 +392,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.leather)
             {
-            	if(new Random().nextFloat() > 0.5)
+            	if(new Random().nextInt(10) > 3)
                 var1 = new ItemStack(Fossil.dnaCow, 1);
             	else
             	var1 = new ItemStack(Fossil.dnaHorse, 1);
