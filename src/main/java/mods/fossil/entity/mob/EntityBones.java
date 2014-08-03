@@ -121,7 +121,15 @@ public class EntityBones extends EntityMob
      */
     protected Entity findPlayerToAttack()
     {
-        return null;
+         EntityPlayer entityplayer = worldObj.getClosestPlayerToEntity(this, 16D);
+            if(entityplayer != null && canEntityBeSeen(entityplayer))
+            {
+                return entityplayer;
+            } else
+            {
+                return null;
+            }
+		}
     }
 
     /**
