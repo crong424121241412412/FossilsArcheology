@@ -604,7 +604,9 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return this.spawnBabyAnimal(var1);
+    	EntityPlesiosaur baby = new EntityPlesiosaur(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

@@ -53,15 +53,21 @@ public class ItemDinosaurModels extends Item {
 
 		for(int i = 0; i < icons.length; i++) 
 		{
-			icons[i] = icon.registerIcon(Fossil.modid + ":" + "dinosaur_bones/models/" + EnumDinoType.values()[i]+"_model");
+			if(i != 4) //Silly Nautilus, bones are for dinosaurs.
+			{
+				icons[i] = icon.registerIcon(Fossil.modid + ":" + "dinosaur_bones/models/" + EnumDinoType.values()[i]+"_model");
+			}
 		}
 	}
 
 	@Override
 	public void getSubItems(int id, CreativeTabs tab, List list) {
 		for(int i = 0; i < icons.length; i++) {
-		ItemStack itemstack = new ItemStack(id, 1, i);
-		list.add(itemstack);
+			if(i != 4) //Silly Nautilus, bones are for dinosaurs.
+			{
+				ItemStack itemstack = new ItemStack(id, 1, i);
+				list.add(itemstack);
+			}
 		}
 	}
 

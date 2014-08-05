@@ -31,6 +31,8 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
     ModelRenderer Tail;
     ModelRenderer Tail1;
 
+	private ModelRenderer headpivot;
+
     public ModelPachycephalosaurus()
     {
         textureWidth = 64;
@@ -80,8 +82,11 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         setRotation(Neck, -0.1F, 0F, 0F);
         Neck.mirror = true;
         Neck.addBox("Neck", -2F, 0F, -4F, 4, 4, 4);
+        headpivot = new ModelRenderer(this, "headpivot");
+        headpivot.setRotationPoint(0F, 0F, -2.5F);
+        setRotation(headpivot, 0F, 0F, 0F);
         Head = new ModelRenderer(this, "Head");
-        Head.setRotationPoint(0F, 0F, -2.5F);
+        Head.setRotationPoint(0F, 0F, 0F);
         setRotation(Head, -0.614F, 0F, 0F);
         Head.mirror = true;
         Head.addBox("HornBumps", -4F, -2F, -4F, 8, 4, 2);
@@ -92,7 +97,8 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         UpperJaw.mirror = true;
         UpperJaw.addBox("UpperJaw", -2F, -2F, -0.5F, 4, 4, 4);
         Head.addChild(UpperJaw);
-        Neck.addChild(Head);
+        Neck.addChild(headpivot);
+        headpivot.addChild(Head);
         UpperBody.addChild(Neck);
         RUpperarm = new ModelRenderer(this, "RUpperarm");
         RUpperarm.setRotationPoint(-2F, 3F, -4F);
@@ -178,8 +184,8 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         float offset = PI * 2 / 11;
         float currentAngle = 0;
         if (!var7){
-        this.Head.rotateAngleZ = var5 / (180F / (float)Math.PI);
-        this.Head.rotateAngleY = var4 / (180F / (float)Math.PI);
+        this.headpivot.rotateAngleX = var5 / (180F / (float)Math.PI);
+        this.headpivot.rotateAngleY = var4 / (180F / (float)Math.PI);
         this.RUpperThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F) * 1.0F * var2;
         this.LUpperThigh.rotateAngleX = MathHelper.cos(var1 * 0.6662F + (float)Math.PI) * 1.0F * var2;
         //Tail anim
@@ -189,8 +195,8 @@ public class ModelPachycephalosaurus extends ModelDinosaurs
         currentAngle = Tail.rotateAngleY + Tail1.rotateAngleY;
         }
         else {
-            this.Head.rotateAngleZ = 0;
-            this.Head.rotateAngleY = 0;
+            this.headpivot.rotateAngleX = 0;
+            this.headpivot.rotateAngleY = 0;
             this.RUpperThigh.rotateAngleX = 0;
             this.LUpperThigh.rotateAngleX = 0;
             //Tail anim

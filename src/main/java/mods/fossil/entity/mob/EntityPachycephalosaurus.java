@@ -452,7 +452,9 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntityPachycephalosaurus baby = new EntityPachycephalosaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

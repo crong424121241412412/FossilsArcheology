@@ -31,7 +31,8 @@ Octo-Docto (Spanish)
 [Gusanito](https://github.com/Gusanito) (Spanish)  
 Retro_King (German)  
 [crafteverywhere](https://github.com/crafteverywhere) (Simplified Chinese)  
-[sb023612](https://github.com/sb023612) (Simplified Chinese)  
+[sb023612](https://github.com/sb023612) (Simplified Chinese)
+[Cronosus](https://github.com/Cronosus) (Czech)
 
 ###### Special Thanks
 Flammarilva (original mod creator) and the rest of Team July

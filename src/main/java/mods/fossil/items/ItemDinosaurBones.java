@@ -46,14 +46,17 @@ public class ItemDinosaurBones extends Item {
 
 		for(int i = 0; i < icons.length; i++) 
 		{
+			if(i != 4) //Silly Nautilus, bones are for dinosaurs.
+			{
 			icons[i] = icon.registerIcon(Fossil.modid + ":" + "dinosaur_bones/" + this.itemType + "/" + EnumDinoType.values()[i] + "_" + this.itemType);
+			}
 		}
 	}
 
 	@Override
 	public void getSubItems(int id, CreativeTabs tab, List list) {
 		for(int i = 0; i < icons.length; i++) {
-			if(i != 4) //Silly Nautilus, skulls are for dinosaurs.
+			if(i != 4) //Silly Nautilus, bones are for dinosaurs.
 			{
 				ItemStack itemstack = new ItemStack(id, 1, i);
 				list.add(itemstack);

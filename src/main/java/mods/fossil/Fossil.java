@@ -159,6 +159,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -194,7 +195,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.1a1";
+    public static final String modversion = "1.6.4 Build 6.3.1a2";
 
     /*
      * Set mod state here
@@ -873,7 +874,6 @@ public class Fossil
             dinoRibCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_RIB_CAGE_NAME, 10204).getInt();
             vertebraeID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.VERTEBRAE_NAME, 10205).getInt();
 
-            
             //Config options
             FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
             FossilOptions.Gen_Academy = config.get("option", "Academy", true).getBoolean(true);
@@ -885,9 +885,12 @@ public class Fossil
             FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
             FossilOptions.Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
             FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
-            //FossilOptions.FossilDebug = config.get("debug", "Fossil_Debug", false).getBoolean(false);
-            FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Academy", 1).getInt(1);
-            FossilOptions.Debug_Gen_Rate_Academy = config.get("debug", "Debug_Gen_Rate_Shipwreck", 1).getInt(1);
+            
+            //Dinosaur Feathers
+            FossilOptions.TRexFeathers = config.get("toggle_feathers", "TRex Feathers", false).getBoolean(false);
+            FossilOptions.DeinonychusFeathers = config.get("toggle_feathers", "Deinonychus Feathers", true).getBoolean(true);
+            FossilOptions.GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
+
             
         }
         catch (Exception var7)
@@ -912,15 +915,9 @@ public class Fossil
         }
         
         Log.setParent(FMLLog.getLogger());
-        Log.setLevel(isDebug() ? Level.ALL : Level.INFO);
         
         FossilAchievementHandler.loadAchievements();
        
-    }
-
-    public boolean isDebug()
-    {
-        return FossilOptions.FossilDebug;
     }
     
     //@SuppressWarnings("static-access")
@@ -1268,8 +1265,9 @@ public class Fossil
     @Mod.EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-//        Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
-//        Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
-//        Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
+        Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
+        Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
+        Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
+        Item.itemsList[volcanicSingleSlab.blockID] = (new ItemSlab(volcanicSingleSlab.blockID - 256, (BlockHalfSlab)volcanicSingleSlab, (BlockHalfSlab)volcanicDoubleSlab, false));
     }
 }
