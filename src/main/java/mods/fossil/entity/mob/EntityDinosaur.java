@@ -956,7 +956,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             return 0;
         }
 
-        int j = (new Random()).nextInt(4);
+        int j = (new Random()).nextInt(7);
         //int var4 = this.isModelized() ? 0 : this.SelfType.ordinal();
         int id = 0;
 
@@ -977,16 +977,28 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             case 3:
                 id = Fossil.skull.itemID;
                 break;
+                
+            case 4:
+                id = Fossil.vertebrae.itemID;
+                break;
+                
+            case 5:
+                id = Fossil.armBone.itemID;
+                break;
+                
+            case 6:
+                id = Fossil.dinoRibCage.itemID;
+                break;
         }
 
-        this.entityDropItem(new ItemStack(id, 1, 0/*, var4*/), 0.5F);
+        this.entityDropItem(new ItemStack(id, 1, this.SelfType.ordinal()), 0.5F);
 
         if (!this.isAdult())
         {
             return 0;
         }
 
-        j = (new Random()).nextInt(4);
+        j = (new Random()).nextInt(7);
 
         switch (j)
         {
@@ -1005,11 +1017,23 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             case 3:
                 id = Fossil.skull.itemID;
                 break;
+                
+            case 4:
+                id = Fossil.vertebrae.itemID;
+                break;
+                
+            case 5:
+                id = Fossil.armBone.itemID;
+                break;
+                
+            case 6:
+                id = Fossil.dinoRibCage.itemID;
+                break;
         }
 
         if ((new Random()).nextInt(10000) < 500)
         {
-            this.entityDropItem(new ItemStack(id, 1, 0/*var4*/), 0.5F);
+            this.entityDropItem(new ItemStack(id, 1, this.SelfType.ordinal()), 0.5F);
         }
 
         return 0;
@@ -1088,10 +1112,16 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     
     protected boolean modelizedInteract(EntityPlayer var1)
     {
-        this.faceEntity(var1, 360.0F, 360.0F);
         ItemStack var2 = var1.inventory.getCurrentItem();
 
-        if (var2 != null)
+        if (var2 == null)
+        {
+        	if(var1.isSneaking())
+        		this.nudgeEntity(var1);
+        	else
+                this.faceEntity(var1, 360.0F, 360.0F);	
+        }
+        else
         {
             if (var2.itemID == Item.bone.itemID)
             {
@@ -1111,7 +1141,15 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
         return false;
     }
-
+    
+    public void nudgeEntity(EntityPlayer player)
+    {
+        double x = player.posX - this.posX;
+        double z = player.posZ - this.posZ;
+        
+        this.setPosition(this.posX + (player.posX - this.posX)*0.01F, this.posY, this.posZ + (player.posZ - this.posZ)*0.01F);
+    }
+    
     protected void updateEntityActionState()
     {
         if (!this.isModelized())

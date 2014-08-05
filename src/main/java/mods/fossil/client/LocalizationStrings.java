@@ -140,7 +140,11 @@ public class LocalizationStrings
     public static final String POTTERY_SHARDS = "potteryShard";
     public static final String BROKEN_HEAD_RELIC = "brokenHeadRelic";
     public static final String GASTORNIS_EGG_NAME = "eggGastornis";
-    public static final String CULTIVATED_GASTORNIS_EGG_NAME = "eggCultivatedGastornis";    
+    public static final String CULTIVATED_GASTORNIS_EGG_NAME = "eggCultivatedGastornis";   
+    public static final String DINOSAUR_MODELS = "dinosaurModels";
+	public static final String ARM_BONE_NAME = "armBone";
+	public static final String DINO_RIB_CAGE_NAME = "dinoRibCage";
+	public static final String VERTEBRAE_NAME = "vertebrae";
     
     //DNA
     public static final String DNA_PIG_NAME = "dnaPig";
@@ -181,6 +185,8 @@ public class LocalizationStrings
     public static final String FMATERIAL_NAME = "itemgroup.FMaterial";
     public static final String FTOOLS_NAME = "itemgroup.FTools";
     public static final String FFIGURINES_NAME = "itemgroup.FFigurines";
+    public static final String FBONES_NAME = "itemgroup.FBones";
+
 
     //Pedia Hatching Text
     public static final String PEDIA_EGG_DRY = "pedia.eggDry";
@@ -263,6 +269,8 @@ public class LocalizationStrings
     //Fossil records
     public static final String FOSSILRECORD_NAME = "record_bones";
     public static final String FOSSILRECORD2_NAME = "record_jp_theme";
+
+
 
 
 

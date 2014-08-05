@@ -115,6 +115,8 @@ import mods.fossil.items.ItemAncientsword;
 import mods.fossil.items.ItemBioFossil;
 import mods.fossil.items.ItemChickenEss;
 import mods.fossil.items.ItemCultivatedDodoEgg;
+import mods.fossil.items.ItemDinosaurModels;
+import mods.fossil.items.ItemDinosaurBones;
 import mods.fossil.items.ItemDodoEgg;
 import mods.fossil.items.ItemEmbryoSyringe;
 import mods.fossil.items.ItemFeet;
@@ -136,8 +138,8 @@ import mods.fossil.items.forge.ForgeItem;
 import mods.fossil.items.forge.ForgePickaxe;
 import mods.fossil.items.forge.ForgeShovel;
 import mods.fossil.items.forge.ForgeSword;
-import mods.fossil.tabs.TabFArmor;
 import mods.fossil.tabs.TabFBlocks;
+import mods.fossil.tabs.TabFBones;
 import mods.fossil.tabs.TabFCombat;
 import mods.fossil.tabs.TabFFigurines;
 import mods.fossil.tabs.TabFFood;
@@ -192,7 +194,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.1 alpha";
+    public static final String modversion = "1.6.4 Build 6.3.1a1";
 
     /*
      * Set mod state here
@@ -234,10 +236,10 @@ public class Fossil
     public static CreativeTabs tabFItems = new TabFItems(CreativeTabs.getNextID(), "Fossil Items");
     public static CreativeTabs tabFFood = new TabFFood(CreativeTabs.getNextID(), "Fossil Food");
     public static CreativeTabs tabFCombat = new TabFCombat(CreativeTabs.getNextID(), "Fossil Combat");
-    public static CreativeTabs tabFArmor = new TabFArmor(CreativeTabs.getNextID(), "Fossil Armor");
     public static CreativeTabs tabFTools = new TabFTools(CreativeTabs.getNextID(), "Fossil Deco");
     public static CreativeTabs tabFMaterial = new TabFMaterial(CreativeTabs.getNextID(), "Fossil Material");
     public static CreativeTabs tabFFigurines = new TabFFigurines(CreativeTabs.getNextID(), "Fossil Test");
+    public static CreativeTabs tabFBones = new TabFBones(CreativeTabs.getNextID(), "Fossil Bones");
 
     //public static WorldType fossil = new WorldTypeFossil(3, "Dino Test");
     
@@ -353,7 +355,10 @@ public class Fossil
     public static Item brokenHeadRelic;
     public static Item potteryShards;
     public static Item livingCoelacanth;
-
+    public static Item dinosaurModels;
+    public static Item armBone;
+    public static Item dinoRibCage;
+    public static Item vertebrae;
 
     //Armor
     public static Item skullHelmet;
@@ -553,6 +558,10 @@ public class Fossil
     public static int brokenHeadRelicID;
     public static int potteryShardsID;
     public static int livingCoelacanthID;
+    public static int dinosaurModelsID;
+    public static int armBoneID;
+    public static int dinoRibCageID;
+    public static int vertebraeID;
 
 
     //Armor
@@ -770,15 +779,14 @@ public class Fossil
             boneRodID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_ROD_NAME, 10037).getInt();
             boneSwordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.BONE_SWORD_NAME, 10038).getInt();
             powderyStringID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POWDERY_STRING_NAME, 10039).getInt();
-//        ancientWoodPlateID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTWOODPLATE_NAME, 10040).getInt();
+            //ancientWoodPlateID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANCIENTWOODPLATE_NAME, 10040).getInt();
             animalCoinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ANIMALCOIN_NAME, 10041).getInt();
             dinoCoinID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_COIN_NAME, 10042).getInt();
             dodoEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_EGG_NAME, 10043).getInt();
             cultivatedDodoEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATED_DODO_EGG_NAME, 10044).getInt();
             fossilRecordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt();
-            //archNotebookID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARCH_NOTEBOOK_NAME, 10046).getInt();
-            //10045
             livingCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LIVING_COELACANTH_NAME, 10046).getInt();
+
             //Armor
             skullHelmetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_HELMET_NAME, 10047).getInt();
             ribCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RIBCAGE_NAME, 10048).getInt();
@@ -860,6 +868,11 @@ public class Fossil
             cookedDinoMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt();
             figurineItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10200).getInt();
             potteryShardsID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POTTERY_SHARDS, 10201).getInt();
+            dinosaurModelsID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOSAUR_MODELS, 10202).getInt();
+            armBoneID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARM_BONE_NAME, 10203).getInt();
+            dinoRibCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_RIB_CAGE_NAME, 10204).getInt();
+            vertebraeID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.VERTEBRAE_NAME, 10205).getInt();
+
             
             //Config options
             FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
@@ -986,7 +999,7 @@ public class Fossil
         ancientSword = new ItemAncientsword(ancientSwordID).setUnlocalizedName(LocalizationStrings.ANCIENT_SWORD_NAME).setCreativeTab(this.tabFCombat);
         brokenSword = new ForgeItem(brokenSwordID, "Broken_Ancient_Sword").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_SWORD_NAME).setCreativeTab(this.tabFMaterial);
         fernSeed = new ItemFernSeed(fernSeedID, ferns.blockID).setUnlocalizedName(LocalizationStrings.FERNSEED_NAME).setCreativeTab(this.tabFItems);
-        ancienthelmet = new ItemAncientHelmet(ancienthelmetID, EnumArmorMaterial.IRON, 3, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_HELMET_NAME).setCreativeTab(this.tabFArmor);
+        ancienthelmet = new ItemAncientHelmet(ancienthelmetID, EnumArmorMaterial.IRON, 3, 0).setUnlocalizedName(LocalizationStrings.ANCIENT_HELMET_NAME).setCreativeTab(this.tabFCombat);
         brokenhelmet = new ForgeItem(brokenhelmetID, "Broken_Ancient_Helm").setMaxStackSize(1).setUnlocalizedName(LocalizationStrings.BROKEN_HELMET_NAME).setCreativeTab(this.tabFMaterial);
         skullStick = new ForgeItem(skullStickID, "Skull_Stick").setUnlocalizedName(LocalizationStrings.SKULL_STICK_NAME).setCreativeTab(this.tabFItems);
         gem = new ForgeItem(gemID, "Scarab_Gem").setUnlocalizedName(LocalizationStrings.SCARAB_GEM_NAME).setCreativeTab(this.tabFItems);
@@ -1007,10 +1020,16 @@ public class Fossil
         diamondjavelin = new ItemJavelin(diamondjavelinID, EnumToolMaterial.EMERALD, "Diamond_Javelin").setUnlocalizedName(LocalizationStrings.DIAMOND_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
         ancientJavelin = new ItemJavelin(ancientJavelinID, scarab, "Ancient_Javelin").setUnlocalizedName(LocalizationStrings.ANCIENT_JAVELIN_NAME).setCreativeTab(this.tabFCombat);
         whip = new ItemWhip(whipID).setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(this.tabFTools);
-        legBone = new ForgeItem(legBoneID, "Leg_Bone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME).setCreativeTab(this.tabFItems);
-        claw = new ForgeItem(clawID, "Claw").setUnlocalizedName(LocalizationStrings.CLAW_NAME).setCreativeTab(this.tabFItems);
-        foot = new ForgeItem(footID, "Foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME).setCreativeTab(this.tabFItems);
-        skull = new ForgeItem(skullID, "Skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME).setCreativeTab(this.tabFItems);
+
+        legBone = new ItemDinosaurBones(legBoneID, "legBone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME);
+        claw = new ItemDinosaurBones(clawID, "claw").setUnlocalizedName(LocalizationStrings.CLAW_NAME);
+        foot = new ItemDinosaurBones(footID, "foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME);
+        skull = new ItemDinosaurBones(skullID, "skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME);
+        armBone = new ItemDinosaurBones(armBoneID, "armBone").setUnlocalizedName(LocalizationStrings.ARM_BONE_NAME);
+        dinoRibCage = new ItemDinosaurBones(dinoRibCageID, "dinoRibCage").setUnlocalizedName(LocalizationStrings.DINO_RIB_CAGE_NAME);
+        vertebrae = new ItemDinosaurBones(vertebraeID, "vertebrae").setUnlocalizedName(LocalizationStrings.VERTEBRAE_NAME);
+        dinosaurModels = new ItemDinosaurModels(dinosaurModelsID).setUnlocalizedName(LocalizationStrings.DINOSAUR_MODELS).setCreativeTab(this.tabFBones);
+
         brokenSapling = new ForgeItem(brokenSaplingID, "Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);
         cultivatedDodoEgg = new ItemCultivatedDodoEgg(cultivatedDodoEggID).setUnlocalizedName(LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
@@ -1020,10 +1039,10 @@ public class Fossil
         livingCoelacanth = new ItemLivingCoelacanth(livingCoelacanthID, 1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
        
         //BoneArmor
-        skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFArmor);
-        ribCage = new ItemRibCage(ribCageID, bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFArmor);
-        femurs = new ItemFemurs(femursID, bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(Fossil.tabFArmor);
-        feet = new ItemFeet(feetID, bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(this.tabFArmor);
+        skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFCombat);
+        ribCage = new ItemRibCage(ribCageID, bone, 3, 1).setUnlocalizedName(LocalizationStrings.RIBCAGE_NAME).setCreativeTab(Fossil.tabFCombat);
+        femurs = new ItemFemurs(femursID, bone, 3, 2).setUnlocalizedName(LocalizationStrings.FEMURS_NAME).setCreativeTab(Fossil.tabFCombat);
+        feet = new ItemFeet(feetID, bone, 3, 3).setUnlocalizedName(LocalizationStrings.FEET_NAME).setCreativeTab(this.tabFCombat);
 
         //Ancient Egg
         //Moved to fossilEnums.EnumDinoType
