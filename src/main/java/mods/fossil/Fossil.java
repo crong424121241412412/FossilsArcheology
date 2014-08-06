@@ -195,7 +195,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.1a2";
+    public static final String modversion = "1.6.4 Build 6.3.1a3";
 
     /*
      * Set mod state here
