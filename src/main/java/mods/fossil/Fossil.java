@@ -564,7 +564,6 @@ public class Fossil
     public static int dinoRibCageID;
     public static int vertebraeID;
 
-
     //Armor
     public static int skullHelmetID;
     public static int ribCageID;
@@ -1019,7 +1018,7 @@ public class Fossil
         whip = new ItemWhip(whipID).setUnlocalizedName(LocalizationStrings.WHIP_NAME).setCreativeTab(this.tabFTools);
 
         legBone = new ItemDinosaurBones(legBoneID, "legBone").setUnlocalizedName(LocalizationStrings.LEGBONE_NAME);
-        claw = new ItemDinosaurBones(clawID, "claw").setUnlocalizedName(LocalizationStrings.CLAW_NAME);
+        claw = new ItemDinosaurBones(clawID, "uniqueItem").setUnlocalizedName(LocalizationStrings.CLAW_NAME);
         foot = new ItemDinosaurBones(footID, "foot").setUnlocalizedName(LocalizationStrings.FOOT_NAME);
         skull = new ItemDinosaurBones(skullID, "skull").setUnlocalizedName(LocalizationStrings.SKULL_NAME);
         armBone = new ItemDinosaurBones(armBoneID, "armBone").setUnlocalizedName(LocalizationStrings.ARM_BONE_NAME);
