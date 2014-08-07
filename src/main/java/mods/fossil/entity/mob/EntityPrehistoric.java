@@ -1,5 +1,15 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mods.fossil.client.gui.GuiPedia;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -82,5 +92,6 @@ public class EntityPrehistoric extends EntityTameable {
 		// TODO Auto-generated method stub
 		return this.worldObj.getPlayerEntityByName(this.getOwnerName());
 	}
+
     
 }

@@ -35,9 +35,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
+
+import org.lwjgl.opengl.GL11;
 
 public abstract class EntityDinosaur extends EntityPrehistoric implements IEntityAdditionalSpawnData
 {
@@ -566,6 +572,39 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
 
         //TODO show all blocks the dino can eat
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	p0.reset();
+		p0.AddStringLR("", 150, false);
+
+    	if(getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" ) != null)
+    	{
+			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" );
+			try {
+			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
+			StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				GL11.glPushMatrix();
+				GL11.glScalef(0.5F, 0.5F, 0.5F);
+				p0.AddStringLR(line, 150, false);
+				GL11.glPopMatrix();
+			}
+			fileReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	else
+    	{
+    		p0.AddStringLR("File not found.", true);
+    	}
+		
+		
+
     }
 
     /**
