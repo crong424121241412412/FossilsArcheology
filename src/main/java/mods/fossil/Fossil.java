@@ -1024,7 +1024,7 @@ public class Fossil
         armBone = new ItemDinosaurBones(armBoneID, "armBone").setUnlocalizedName(LocalizationStrings.ARM_BONE_NAME);
         dinoRibCage = new ItemDinosaurBones(dinoRibCageID, "dinoRibCage").setUnlocalizedName(LocalizationStrings.DINO_RIB_CAGE_NAME);
         vertebrae = new ItemDinosaurBones(vertebraeID, "vertebrae").setUnlocalizedName(LocalizationStrings.VERTEBRAE_NAME);
-        dinosaurModels = new ItemDinosaurModels(dinosaurModelsID).setUnlocalizedName(LocalizationStrings.DINOSAUR_MODELS).setCreativeTab(this.tabFBones);
+        //dinosaurModels = new ItemDinosaurModels(dinosaurModelsID).setUnlocalizedName(LocalizationStrings.DINOSAUR_MODELS).setCreativeTab(this.tabFBones);
 
         brokenSapling = new ForgeItem(brokenSaplingID, "Palae_Fossil").setUnlocalizedName(LocalizationStrings.BROKEN_SAPLING_NAME).setCreativeTab(this.tabFMaterial);
         dodoEgg = new ItemDodoEgg(dodoEggID).setUnlocalizedName(LocalizationStrings.DODO_EGG_NAME);

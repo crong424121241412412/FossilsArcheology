@@ -211,18 +211,17 @@ public class WaterDinoAIEat extends EntityAIBase
         	if(Distance < SEARCH_RANGE) {
         		
         		this.moveToTarget(this.destX, this.destY, this.destZ);
-        	
+        		this.TimeAtThisTarget++;
+        		
         		if (Distance < 4.5D){
         			if (this.targetFeeder != null) {
 		                int healval = MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur, this.dinosaur.SelfType) / 15D);
 		                this.dinosaur.heal(healval);
-		                this.TimeAtThisTarget++;
-		
-		                if (this.TimeAtThisTarget == 100){
-		                    endTask();
-		                }
         			}
         		}
+                if (this.TimeAtThisTarget == 100){
+                    endTask();
+                }
         	}
         	else {
         		endTask();
@@ -357,16 +356,6 @@ public class WaterDinoAIEat extends EntityAIBase
             //rotate entity to face target
             this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
  
-            //this.entityVector = Vec3.createVectorHelper(this.dinosaur.posX, this.dinosaur.posY, this.dinosaur.posZ);
-            //this.targetVector = Vec3.createVectorHelper(this.destX, this.destY, this.destZ);
-            
-            
-            //this.moveVector = targetVector.subtract(entityVector);
-            
-            //this.normalizedVector = this.moveVector.normalize();
-            
-            
-            
             this.movePosX = this.deltaX;
             this.movePosY = this.deltaY;
             this.movePosZ = this.deltaZ;

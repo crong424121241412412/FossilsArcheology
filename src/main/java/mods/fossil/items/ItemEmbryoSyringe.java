@@ -109,42 +109,42 @@ public class ItemEmbryoSyringe extends Item
 
             if (pregnantEntity != null)
             {
-                EnumAnimalType e0 = EnumAnimalType.Chicken;
+                EnumAnimalType e0 = null;
 
                 if (itemstack.itemID == Fossil.embryoQuagga.itemID && pregnantEntity instanceof EntityPregnantHorse)
                     e0 = EnumAnimalType.Quagga;
                 
-                else if (itemstack.itemID == Fossil.embryoChicken.itemID)
+                if (itemstack.itemID == Fossil.embryoChicken.itemID)
                 {
                     e0 = EnumAnimalType.Chicken;
                 }
 
-                else if (itemstack.itemID == Fossil.embryoCow.itemID)
+                if (itemstack.itemID == Fossil.embryoCow.itemID)
                 {
                     e0 = EnumAnimalType.Cow;
                 }
                 
-                else if (itemstack.itemID == Fossil.embryoHorse.itemID)
+                if (itemstack.itemID == Fossil.embryoHorse.itemID)
                 {
                     e0 = EnumAnimalType.Horse;
                 }
 
-                else if (itemstack.itemID == Fossil.embryoMammoth.itemID)
+                if (itemstack.itemID == Fossil.embryoMammoth.itemID)
                 {
                     e0 = EnumAnimalType.Mammoth;
                 }
 
-                else if (itemstack.itemID == Fossil.embryoPig.itemID)
+                if (itemstack.itemID == Fossil.embryoPig.itemID)
                 {
                     e0 = EnumAnimalType.Pig;
                 }
 
-                else if (itemstack.itemID == Fossil.embryoSmilodon.itemID)
+                if (itemstack.itemID == Fossil.embryoSmilodon.itemID)
                 {
                     e0 = EnumAnimalType.Smilodon;
                 }
 
-                else if (itemstack.itemID == Fossil.embryoSheep.itemID)
+                if (itemstack.itemID == Fossil.embryoSheep.itemID)
                 {
                     e0 = EnumAnimalType.Sheep;
                 }

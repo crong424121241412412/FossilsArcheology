@@ -1159,29 +1159,33 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
         }
     }
     
-    protected boolean modelizedInteract(EntityPlayer var1)
+    protected boolean modelizedInteract(EntityPlayer player)
     {
-        ItemStack var2 = var1.inventory.getCurrentItem();
+        ItemStack itemstack = player.inventory.getCurrentItem();
 
-        if (var2 == null)
+        if (itemstack == null)
         {
-        	if(var1.isSneaking())
-        		this.nudgeEntity(var1);
+        	if(player.isSneaking())
+        	{
+        		this.nudgeEntity(player);
+        	}
         	else
-                this.faceEntity(var1, 360.0F, 360.0F);	
+        	{
+                this.faceEntity(player, 360.0F, 360.0F);
+        	}
         }
         else
         {
-            if (var2.itemID == Item.bone.itemID)
+            if (itemstack.itemID == Item.bone.itemID)
             {
                 this.increaseDinoAge();
                 
-                if (!var1.capabilities.isCreativeMode)
-                --var2.stackSize;
+                if (!player.capabilities.isCreativeMode)
+                --itemstack.stackSize;
 
-                if (var2.stackSize <= 0)
+                if (itemstack.stackSize <= 0)
                 {
-                    var1.inventory.setInventorySlotContents(var1.inventory.currentItem, (ItemStack)null);
+                    player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
                 }
 
                 return true;

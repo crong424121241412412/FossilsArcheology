@@ -69,18 +69,24 @@ public class EntityPregnantPig extends EntityPig implements IViviparous, IEntity
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer var1)
+    public boolean interact(EntityPlayer player)
     {
-        ItemStack var2 = var1.inventory.getCurrentItem();
+        ItemStack itemstack = player.inventory.getCurrentItem();
 
-        if (FMLCommonHandler.instance().getSide().isClient() && var2 != null && var2.itemID == Fossil.dinoPedia.itemID)
+        if (FMLCommonHandler.instance().getSide().isClient() && itemstack != null && itemstack.itemID == Fossil.dinoPedia.itemID)
         {
             this.setPedia();
-            var1.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
+            player.openGui(Fossil.instance, 4, this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ);
             return true;
         }
-
-        return super.interact(var1);
+        else if (this.EmbryoProgress < 101)
+        {
+        	return true;
+        }
+        else
+        {
+            return super.interact(player);
+        }
     }
 
     /**

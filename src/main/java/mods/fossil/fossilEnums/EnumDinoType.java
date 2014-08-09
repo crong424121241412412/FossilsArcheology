@@ -25,7 +25,7 @@ public enum EnumDinoType
 {
     //													C.MODEL	| C.TAME	| C.RIDE	| C.HERBIVORE/CARNIVORE | C.CARRY
     Triceratops(EntityTriceratops.class, 				C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
-    Velociraptor(EntityVelociraptor.class,						  C.TAME  				| C.CARNIVORE),
+    Velociraptor(EntityVelociraptor.class,					      C.TAME  				| C.CARNIVORE),
     TRex(EntityTRex.class, 								C.MODEL | C.TAME    | C.RIDE  	| C.CARNIVORE),
     Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME  			 	| C.CARNIVORE),
     Nautilus(EntityNautilus.class, 						C.NOTHING),
@@ -37,9 +37,9 @@ public enum EnumDinoType
     Spinosaurus(EntitySpinosaurus.class, 				C.MODEL 						| C.CARNIVORE),
     Compsognathus(EntityCompsognathus.class,			C.MODEL | C.TAME				| C.CARNIVORE),
     Ankylosaurus(EntityAnkylosaurus.class,  			C.MODEL | C.TAME  	| C.RIDE  	| C.HERBIVORE),
-    Pachycephalosaurus(EntityPachycephalosaurus.class, 			  C.TAME 				| C.HERBIVORE),
+    Pachycephalosaurus(EntityPachycephalosaurus.class, 	          C.TAME 				| C.HERBIVORE),
     Deinonychus(EntityDeinonychus.class,				C.MODEL | C.TAME  				| C.CARNIVORE),
-    Gallimimus(EntityGallimimus.class,							  C.TAME	| C.RIDE	| C.HERB_CARN),
+    Gallimimus(EntityGallimimus.class,						      C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
     //Gastornis(EntityGastornis.class, 							  C.TAME	| C.RIDE	| C.CARNIVORE),
     ;
