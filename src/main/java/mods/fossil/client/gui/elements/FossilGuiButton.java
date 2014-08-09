@@ -23,24 +23,5 @@ public class FossilGuiButton extends GuiButton
         IconIndexWidth = par4;
     }
 
-    public void drawButton(Minecraft par1Minecraft, int par2, int par3)
-    {
-    	/*
-        if (this.drawButton)
-        {
-            boolean var4 = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            par1Minecraft.renderEngine.bindTexture(new ResourceLocation(""));
-            int var6 = IconIndexHeight * 32;
-            int var5 = IconIndexWidth * 32;
-
-            if (var4)
-            {
-                var5 += 32;
-            }
-
-            this.drawTexturedModalRect(this.xPosition, this.yPosition, var5, var6, 32, 32);
-        }
-        */
-    }
+    public void drawButton(Minecraft par1Minecraft, int par2, int par3) {}
 }

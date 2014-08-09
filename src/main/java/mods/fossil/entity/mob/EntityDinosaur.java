@@ -19,6 +19,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.TileEntityFeeder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
 import net.minecraft.entity.*;
@@ -579,10 +580,17 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     {
     	p0.reset();
 		p0.AddStringLR("", 150, false);
-
-    	if(getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" ) != null)
+		String translatePath = "assets/fossil/dinopedia/" + Minecraft.getMinecraft().gameSettings.language +"/";
+		String bioFile = String.valueOf(this.SelfType) + ".txt";
+		
+		if(getClass().getClassLoader().getResourceAsStream( translatePath ) == null)
+		{
+			translatePath = "assets/fossil/dinopedia/" + "en_US" + "/";
+		}
+		
+    	if(getClass().getClassLoader().getResourceAsStream( translatePath + bioFile ) != null)
     	{
-			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + String.valueOf(this.SelfType) + ".txt" );
+			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( translatePath + bioFile );
 			try {
 			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
 			StringBuffer stringBuffer = new StringBuffer();
@@ -600,11 +608,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     	}
     	else
     	{
-    		p0.AddStringLR("File not found.", true);
+    		p0.AddStringLR("File not found.", false);
+			GL11.glPushMatrix();
+			GL11.glScalef(0.5F, 0.5F, 0.5F);
+    		p0.AddStringLR(translatePath + bioFile, 150, false);
+			GL11.glPopMatrix();
     	}
-		
-		
-
     }
 
     /**
@@ -1037,41 +1046,42 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             return 0;
         }
 
-        j = (new Random()).nextInt(7);
-
-        switch (j)
-        {
-            case 0:
-                id = Fossil.legBone.itemID;
-                break;
-
-            case 1:
-                id = Fossil.claw.itemID;
-                break;
-
-            case 2:
-                id = Fossil.foot.itemID;
-                break;
-
-            case 3:
-                id = Fossil.skull.itemID;
-                break;
-                
-            case 4:
-                id = Fossil.vertebrae.itemID;
-                break;
-                
-            case 5:
-                id = Fossil.armBone.itemID;
-                break;
-                
-            case 6:
-                id = Fossil.dinoRibCage.itemID;
-                break;
-        }
 
         if ((new Random()).nextInt(10000) < 500)
         {
+	        j = (new Random()).nextInt(7);
+	
+	        switch (j)
+	        {
+	            case 0:
+	                id = Fossil.legBone.itemID;
+	                break;
+	
+	            case 1:
+	                id = Fossil.claw.itemID;
+	                break;
+	
+	            case 2:
+	                id = Fossil.foot.itemID;
+	                break;
+	
+	            case 3:
+	                id = Fossil.skull.itemID;
+	                break;
+	                
+	            case 4:
+	                id = Fossil.vertebrae.itemID;
+	                break;
+	                
+	            case 5:
+	                id = Fossil.armBone.itemID;
+	                break;
+	                
+	            case 6:
+	                id = Fossil.dinoRibCage.itemID;
+	                break;
+	        }
+
             this.entityDropItem(new ItemStack(id, 1, this.SelfType.ordinal()), 0.5F);
         }
 

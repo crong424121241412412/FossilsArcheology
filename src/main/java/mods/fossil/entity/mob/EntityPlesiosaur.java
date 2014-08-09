@@ -90,7 +90,6 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
-      //  this.tasks.addTask(7, new DinoAIEat(this, 24));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(11, new EntityAILookIdle(this));

@@ -59,14 +59,6 @@ public class WaterDinoAIEat extends EntityAIBase
 
 	private double deltaX;
 
-	private Vec3 entityVector;
-
-	private Vec3 targetVector;
-
-	private Vec3 moveVector;
-
-	private Vec3 normalizedVector;
-
 	private double movePosX;
 
 	private double movePosY;
@@ -82,6 +74,7 @@ public class WaterDinoAIEat extends EntityAIBase
      */
     public WaterDinoAIEat(EntityDinosaur Dino0, int Range0)
     {
+    	this.theWorld = Dino0.worldObj;
         this.targetMob = null;
         this.targetFeeder = null;	
         this.dinosaur = Dino0;
@@ -106,60 +99,57 @@ public class WaterDinoAIEat extends EntityAIBase
     {
         int Range = this.SEARCH_RANGE;// Current Searching range
 
+        if(!theWorld.isRemote)
+        {
+	        if (!Fossil.FossilOptions.Dinos_Starve)
+	        	return false;
+        }
+        
         if (!this.dinosaur.IsHungry() && !this.dinosaur.IsDeadlyHungry())
         {
             this.typeofTarget = NO_TARGET;
             return false;
         }
-
-        targetFeeder = this.dinosaur.GetNearestFeeder(SEARCH_RANGE);
-        //Feeder has priority over other food sources.
-        if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
-        {      	
-            this.destX = this.targetFeeder.xCoord;
-            this.destY = this.targetFeeder.yCoord;
-            this.destZ = this.targetFeeder.zCoord;
-            this.typeofTarget = FEEDER;
-            return targetFeeder != null;
-        }
-        //After Feeder, check if there are items, THEN blocks on the ground to eat.
-        else if (!this.dinosaur.SelfType.FoodItemList.IsEmpty() || !this.dinosaur.SelfType.FoodBlockList.IsEmpty())
+        else
         {
-
-            this.targetItem = this.getNearestItem2(SEARCH_RANGE);
-            if( this.targetItem != null) {
-                this.destX = targetItem.posX;
-                this.destY = targetItem.posY;
-                this.destZ = targetItem.posZ;
-            	this.typeofTarget = ITEM;
-            	return true;
-            }
-            /*
-            if (targetItem != null)//Found Item, go there and eat it
-            {
-                this.destX = targetItem.xCoord;
-                this.destY = targetItem.yCoord;
-                this.destZ = targetItem.zCoord;
-                this.typeofTarget = ITEM;
-                Log.log(Level.FINEST, "ITEM FOUND!");
-                return targetItem != null;
-            }
-            */
-            
-            if(!this.dinosaur.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
-            {
-                Vec3 targetBlock = this.dinosaur.getBlockToEat(SEARCH_RANGE/2);
-                
-                if (targetBlock != null)//Found Item, go there and eat it
-                {
-                    this.destX = targetBlock.xCoord;
-                    this.destY = targetBlock.yCoord;
-                    this.destZ = targetBlock.zCoord;
-                    this.typeofTarget=BLOCK;
-                    //System.out.println("BLOCK FOUND!");
-                    return true;
-                }
-            }
+	        targetFeeder = this.dinosaur.GetNearestFeeder(SEARCH_RANGE);
+	        //Feeder has priority over other food sources.
+	        if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
+	        {      	
+	            this.destX = this.targetFeeder.xCoord;
+	            this.destY = this.targetFeeder.yCoord;
+	            this.destZ = this.targetFeeder.zCoord;
+	            this.typeofTarget = FEEDER;
+	            return targetFeeder != null;
+	        }
+	        //After Feeder, check if there are items, THEN blocks on the ground to eat.
+	        else if (!this.dinosaur.SelfType.FoodItemList.IsEmpty() || !this.dinosaur.SelfType.FoodBlockList.IsEmpty())
+	        {
+	
+	            this.targetItem = this.getNearestItem2(SEARCH_RANGE);
+	            if( this.targetItem != null) {
+	                this.destX = targetItem.posX;
+	                this.destY = targetItem.posY;
+	                this.destZ = targetItem.posZ;
+	            	this.typeofTarget = ITEM;
+	            	return true;
+	            }
+	            
+	            if(!this.dinosaur.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
+	            {
+	                Vec3 targetBlock = this.dinosaur.getBlockToEat(SEARCH_RANGE/2);
+	                
+	                if (targetBlock != null)//Found Item, go there and eat it
+	                {
+	                    this.destX = targetBlock.xCoord;
+	                    this.destY = targetBlock.yCoord;
+	                    this.destZ = targetBlock.zCoord;
+	                    this.typeofTarget=BLOCK;
+	                    //System.out.println("BLOCK FOUND!");
+	                    return true;
+	                }
+	            }
+	        }
         }
         return false;
     }

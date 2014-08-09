@@ -280,7 +280,17 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             {
                 int var2 = this.analyzerItemStacks[var1].getItem().itemID;
 
-                if (EnumDinoType.isDinoDrop(this.analyzerItemStacks[var1].getItem()) || (var2 == Fossil.biofossil.itemID) || (var2 == Fossil.relic.itemID) || /*(var2 == Fossil.rawDinoMeat.itemID) ||*/ (var2 == Item.porkRaw.itemID) || (var2 == Item.beefRaw.itemID) || (var2 == Item.egg.itemID) || (var2 == Item.chickenRaw.itemID) || (var2 == Block.cloth.blockID) || (var2 == Fossil.icedMeat.itemID))
+                if (EnumDinoType.isDinoDrop(this.analyzerItemStacks[var1].getItem()) 
+                		|| (var2 == Fossil.biofossil.itemID) 
+                		|| (var2 == Fossil.relic.itemID) 
+                		|| /*(var2 == Fossil.rawDinoMeat.itemID) 
+                		||*/ (var2 == Item.porkRaw.itemID) 
+                		|| (var2 == Item.beefRaw.itemID) 
+                		|| (var2 == Item.egg.itemID) 
+                		|| (var2 == Item.chickenRaw.itemID) 
+                		|| (var2 == Block.cloth.blockID) 
+                		|| (var2 == Fossil.icedMeat.itemID)
+                		|| (var2 == Item.leather.itemID) )
                 {
                     this.RawIndex = var1;
                     break;

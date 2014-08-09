@@ -68,10 +68,12 @@ public class EntityCoelacanth extends EntityWaterMob {
     private float randomMotionVecY;
     private float randomMotionVecZ;
     
+	EntityPrehistoric entityPrehistoricClass = new EntityPrehistoric(worldObj);
+	
     public EntityCoelacanth(World par1World)
     {
         super(par1World);
-        
+
         this.setSize(this.width * 3.5F, this.height * 0.5F);
         
   //      this.setSize(this.width * 6.0F, this.height * 6.0F);
@@ -218,31 +220,7 @@ public class EntityCoelacanth extends EntityWaterMob {
     @SideOnly(Side.CLIENT)
     public void ShowPedia2(GuiPedia p0)
     {
-    	p0.reset();
-		p0.AddStringLR("", 150, false);
-
-    	if(getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + "Coelacanth" + ".txt" ) != null)
-    	{
-			InputStream fileReader = getClass().getClassLoader().getResourceAsStream( "assets/fossil/dinopedia/" + "Coelacanth" + ".txt" );
-			try {
-			BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(fileReader));
-			StringBuffer stringBuffer = new StringBuffer();
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				GL11.glPushMatrix();
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				p0.AddStringLR(line, 150, false);
-				GL11.glPopMatrix();
-			}
-			fileReader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    	}
-    	else
-    	{
-    		p0.AddStringLR("File not found.", true);
-    	}
+    	entityPrehistoricClass.ShowPedia2(p0, "Coelacanth");
     }
     
     /**

@@ -73,19 +73,19 @@ public class ItemEmbryoSyringe extends Item
                 pregnantEntity = new EntityPregnantPig(thisEntity.worldObj);
             }
 
-            if (thisEntity instanceof EntityCow)
+            else if (thisEntity instanceof EntityCow)
             {
                 pregnantEntity = new EntityPregnantCow(thisEntity.worldObj);
             }
 
-            if (thisEntity instanceof EntitySheep)
+            else if (thisEntity instanceof EntitySheep)
             {
                 pregnantEntity = new EntityPregnantSheep(thisEntity.worldObj);
                 ((EntitySheep)pregnantEntity).setFleeceColor(((EntitySheep)thisEntity).getFleeceColor());
                 ((EntitySheep)pregnantEntity).setSheared(((EntitySheep)thisEntity).getSheared());
             }
             
-            if (thisEntity instanceof EntityHorse)
+            else if (thisEntity instanceof EntityHorse)
             {
             	
                 if ( ((EntityHorse)thisEntity).getHorseType() != 0 )
@@ -109,45 +109,46 @@ public class ItemEmbryoSyringe extends Item
 
             if (pregnantEntity != null)
             {
-                EnumAnimalType e0 = null;
+                EnumAnimalType e0 = EnumAnimalType.Chicken;
 
                 if (itemstack.itemID == Fossil.embryoQuagga.itemID && pregnantEntity instanceof EntityPregnantHorse)
                     e0 = EnumAnimalType.Quagga;
                 
-                if (itemstack.itemID == Fossil.embryoChicken.itemID)
+                else if (itemstack.itemID == Fossil.embryoChicken.itemID)
                 {
                     e0 = EnumAnimalType.Chicken;
                 }
 
-                if (itemstack.itemID == Fossil.embryoCow.itemID)
+                else if (itemstack.itemID == Fossil.embryoCow.itemID)
                 {
                     e0 = EnumAnimalType.Cow;
                 }
                 
-                if (itemstack.itemID == Fossil.embryoHorse.itemID)
+                else if (itemstack.itemID == Fossil.embryoHorse.itemID)
                 {
                     e0 = EnumAnimalType.Horse;
                 }
 
-                if (itemstack.itemID == Fossil.embryoMammoth.itemID)
+                else if (itemstack.itemID == Fossil.embryoMammoth.itemID)
                 {
                     e0 = EnumAnimalType.Mammoth;
                 }
 
-                if (itemstack.itemID == Fossil.embryoPig.itemID)
+                else if (itemstack.itemID == Fossil.embryoPig.itemID)
                 {
                     e0 = EnumAnimalType.Pig;
                 }
 
-                if (itemstack.itemID == Fossil.embryoSmilodon.itemID)
+                else if (itemstack.itemID == Fossil.embryoSmilodon.itemID)
                 {
                     e0 = EnumAnimalType.Smilodon;
                 }
 
-                if (itemstack.itemID == Fossil.embryoSheep.itemID)
+                else if (itemstack.itemID == Fossil.embryoSheep.itemID)
                 {
                     e0 = EnumAnimalType.Sheep;
                 }
+                
                 if (e0 != null)
                 {
 	                ((IViviparous)pregnantEntity).SetEmbryo(e0);

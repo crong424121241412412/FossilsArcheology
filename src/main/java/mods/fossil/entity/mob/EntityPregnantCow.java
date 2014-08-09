@@ -199,11 +199,13 @@ public class EntityPregnantCow extends EntityCow implements IViviparous, IEntity
 
     public void writeSpawnData(ByteArrayDataOutput var1)
     {
+    	var1.writeInt(this.EmbryoProgress);
         var1.writeInt(this.Embryo.ordinal());
     }
 
     public void readSpawnData(ByteArrayDataInput var1)
     {
+    	this.EmbryoProgress = var1.readInt();
         this.Embryo = EnumAnimalType.values()[var1.readInt()];
     }
 }
