@@ -110,9 +110,8 @@ public class WaterDinoAIEat extends EntityAIBase
             this.typeofTarget = NO_TARGET;
             return false;
         }
-        else
-        {
-	        targetFeeder = this.dinosaur.GetNearestFeeder(SEARCH_RANGE);
+        
+	        //targetFeeder = this.dinosaur.GetNearestFeeder(Range);
 	        //Feeder has priority over other food sources.
 	        if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
 	        {      	
@@ -150,7 +149,6 @@ public class WaterDinoAIEat extends EntityAIBase
 	                }
 	            }
 	        }
-        }
         return false;
     }
 
@@ -161,7 +159,7 @@ public class WaterDinoAIEat extends EntityAIBase
     public boolean continueExecuting()
     {
     	
-    	if( !(this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry())){
+    	if( !this.dinosaur.IsHungry() || !this.dinosaur.IsDeadlyHungry()){
     		return false;
     	}
     	else

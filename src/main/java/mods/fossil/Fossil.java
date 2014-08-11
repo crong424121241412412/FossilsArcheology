@@ -101,6 +101,7 @@ import mods.fossil.guiBlocks.TileEntityWorktable;
 import mods.fossil.handler.FossilAchievementHandler;
 import mods.fossil.handler.FossilConnectionHandler;
 import mods.fossil.handler.FossilCraftingHandler;
+import mods.fossil.handler.FossilInteractEvent;
 import mods.fossil.handler.FossilLivingEvent;
 import mods.fossil.handler.FossilOreDictionary;
 import mods.fossil.handler.FossilPickupHandler;
@@ -190,12 +191,12 @@ import cpw.mods.fml.relauncher.Side;
 //import mods.fossil.gens.WorldGeneratorVolcanicRock;
 
 @Mod(modid = Fossil.modid, name = "Fossil/Archeology", version = Fossil.modversion)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true)
 
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.1a5 debug";
+    public static final String modversion = "1.6.4 Build 6.3.1a11";
 
     /*
      * Set mod state here
@@ -228,7 +229,7 @@ public class Fossil
      */
     //public static boolean DebugMode = FossilOptions.FossilDebug;
     public static boolean DebugMode() {
-        return true;
+        return false;
     }
 
     public static final double MESSAGE_DISTANCE = 25.0D;
@@ -1170,16 +1171,16 @@ public class Fossil
         EntityRegistry.registerModEntity(EntityDinoEgg.class, 			"DinoEgg", 				8, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 	12, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityPigBoss.class, 			"PigBoss", 				13, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntitySmilodon.class, 			"Smilodon", 			22, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityDodo.class,           	"Dodo",             	25, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityCoelacanth.class, 		"Coelacanth",    		28, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPregnantHorse.class, 	"PregnantHorse", 		29, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantHorse.class, 	"PregnantHorse", 		29, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityQuagga.class, 			"Quagga", 				30, this, 250, 3, true);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
@@ -1234,7 +1235,8 @@ public class Fossil
         proxy.onInit(event);
         MinecraftForge.EVENT_BUS.register(new FossilToolEvent());
         MinecraftForge.EVENT_BUS.register(new FossilLivingEvent());
-        
+        MinecraftForge.EVENT_BUS.register(new FossilInteractEvent());
+
 
         
 

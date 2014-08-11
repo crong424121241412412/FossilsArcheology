@@ -94,6 +94,9 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         this.maxSize = 6.0F;
         
         this.getNavigator().setCanSwim(true);
+    	this.tasks.addTask(6, this.aiWaterDinoWander);
+    	this.tasks.addTask(5, this.aiWaterDinoEat);
+    	this.tasks.addTask(5, this.aiWaterDinoHunt);
         this.tasks.addTask(3, new DinoAIAttackOnCollide(this, 1.1D, true));
         this.tasks.addTask(4, new DinoAIFollowOwner(this, 5.0F, 2.0F, 1.0F));
         this.tasks.addTask(8, new DinoAIFishing(this, /*this.HuntLimit,*/ 1));
@@ -192,8 +195,8 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
     public void onUpdate()
     {
         super.onUpdate();
-        
-        if(this.isInWater()){
+        /*
+        if(this.isAABBInMaterial(var11, Material.water)){
         	this.tasks.removeTask(this.aiDinoWander);
         	this.tasks.removeTask(this.aiDinoEat);
         	this.tasks.addTask(6, this.aiWaterDinoWander);
@@ -207,6 +210,7 @@ public class EntityPlesiosaur extends EntitySwimmingDino implements IMob
         	this.tasks.addTask(6, this.aiDinoWander);
         	this.tasks.addTask(5, this.aiDinoEat);
         }
+        */
     }
 
     /**

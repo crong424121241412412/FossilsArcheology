@@ -1,5 +1,7 @@
 package mods.fossil.items;
 
+import java.util.Random;
+
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityPregnantCow;
 import mods.fossil.entity.mob.EntityPregnantHorse;
@@ -25,6 +27,9 @@ public class ItemEmbryoSyringe extends Item
 {
     //private String[] ItemNames = new String[] {"EmbyoPig", "EmbyoSheep", "EmbyoCow", "EmbyoSmilodon", "EmbyoMammoth"};
     int AnimalType;
+	private EnumAnimalType embryo;
+    private Random rand;
+    
     public ItemEmbryoSyringe(int var1, int AnimalType0)
     {
         super(var1);
@@ -32,6 +37,7 @@ public class ItemEmbryoSyringe extends Item
         this.setMaxDamage(0);
         this.maxStackSize = 64;
         this.AnimalType = AnimalType0;
+        this.rand = new Random();
     }
 
     @Override
@@ -70,106 +76,139 @@ public class ItemEmbryoSyringe extends Item
 
             if (thisEntity instanceof EntityPig)
             {
-                pregnantEntity = new EntityPregnantPig(thisEntity.worldObj);
+            	EntityPregnantPig props = EntityPregnantPig.get(((EntityPig)thisEntity));
+                if (props.Embryo != null)
+                {
+                	return false;
+                }
+                embryo = this.EmbryoSelector(itemstack, thisEntity);
+                if(embryo != null)
+                {
+                	props.SetEmbryo(embryo);
+                }
+                else
+                {
+                	return false;
+                }
             }
 
             else if (thisEntity instanceof EntityCow)
             {
-                pregnantEntity = new EntityPregnantCow(thisEntity.worldObj);
+            	EntityPregnantCow props = EntityPregnantCow.get(((EntityCow)thisEntity));
+                if (props.Embryo != null)
+                {
+                	return false;
+                }
+                embryo = this.EmbryoSelector(itemstack, thisEntity);
+                if(embryo != null)
+                {
+                	props.SetEmbryo(embryo);
+                }
+                else
+                {
+                	return false;
+                }
             }
 
             else if (thisEntity instanceof EntitySheep)
             {
-                pregnantEntity = new EntityPregnantSheep(thisEntity.worldObj);
-                ((EntitySheep)pregnantEntity).setFleeceColor(((EntitySheep)thisEntity).getFleeceColor());
-                ((EntitySheep)pregnantEntity).setSheared(((EntitySheep)thisEntity).getSheared());
+            	EntityPregnantSheep props = EntityPregnantSheep.get(((EntitySheep)thisEntity));
+                if (props.Embryo != null)
+                {
+                	return false;
+                }
+                embryo = this.EmbryoSelector(itemstack, thisEntity);
+                if(embryo != null)
+                {
+                	props.SetEmbryo(embryo);
+                }
+                else
+                {
+                	return false;
+                }
             }
             
             else if (thisEntity instanceof EntityHorse)
             {
-            	
-                if ( ((EntityHorse)thisEntity).getHorseType() != 0 )
+            	EntityPregnantHorse props = EntityPregnantHorse.get(((EntityHorse)thisEntity));
+                if ( ((EntityHorse)thisEntity).getHorseType() != 0 
+                		|| props.Embryo != null)
                 {
                 	return false;
                 }
-                pregnantEntity = new EntityPregnantHorse(thisEntity.worldObj);
-
-                
-                ((EntityHorse)pregnantEntity).setHorseType(((EntityHorse)thisEntity).getHorseType());
-                ((EntityHorse)pregnantEntity).setHorseVariant(((EntityHorse)thisEntity).getHorseVariant());
-                ((EntityHorse)pregnantEntity).setHorseTamed(((EntityHorse)thisEntity).isTame());
-                ((EntityHorse)pregnantEntity).setHorseSaddled(((EntityHorse)thisEntity).isHorseSaddled());
-        		((EntityHorse)pregnantEntity).setOwnerName(((EntityHorse)thisEntity).getOwnerName());
-        		((EntityHorse)pregnantEntity).setHorseTamed(((EntityHorse)thisEntity).isTame());
-        		((EntityHorse)pregnantEntity).setTemper(((EntityHorse)thisEntity).getTemper());
-        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue()));
-        		((EntityHorse)pregnantEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute((((EntityHorse)thisEntity).getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue()));
-        		((EntityHorse)pregnantEntity).setGrowingAge(((EntityHorse)thisEntity).getGrowingAge());
-            }
-
-            if (pregnantEntity != null)
-            {
-                EnumAnimalType e0 = null;
-
-                if (itemstack.itemID == Fossil.embryoQuagga.itemID && pregnantEntity instanceof EntityPregnantHorse)
-                    e0 = EnumAnimalType.Quagga;
-                
-                if (itemstack.itemID == Fossil.embryoChicken.itemID)
+                embryo = this.EmbryoSelector(itemstack, thisEntity);
+                if(embryo != null)
                 {
-                    e0 = EnumAnimalType.Chicken;
-                }
-
-                if (itemstack.itemID == Fossil.embryoCow.itemID)
-                {
-                    e0 = EnumAnimalType.Cow;
-                }
-                
-                if (itemstack.itemID == Fossil.embryoHorse.itemID)
-                {
-                    e0 = EnumAnimalType.Horse;
-                }
-
-                if (itemstack.itemID == Fossil.embryoMammoth.itemID)
-                {
-                    e0 = EnumAnimalType.Mammoth;
-                }
-
-                if (itemstack.itemID == Fossil.embryoPig.itemID)
-                {
-                    e0 = EnumAnimalType.Pig;
-                }
-
-                if (itemstack.itemID == Fossil.embryoSmilodon.itemID)
-                {
-                    e0 = EnumAnimalType.Smilodon;
-                }
-
-                if (itemstack.itemID == Fossil.embryoSheep.itemID)
-                {
-                    e0 = EnumAnimalType.Sheep;
-                }
-                
-                if (e0 != null)
-                {
-	                ((IViviparous)pregnantEntity).SetEmbryo(e0);
-	                ((EntityAnimal)pregnantEntity).setLocationAndAngles(thisEntity.posX, thisEntity.posY, thisEntity.posZ, thisEntity.rotationYaw, thisEntity.rotationPitch);
-	                thisEntity.setDead();
-	
-	                if (!thisEntity.worldObj.isRemote)
-	                {
-	                    thisEntity.worldObj.spawnEntityInWorld((EntityAnimal)pregnantEntity);
-	                }
-	
-	                --itemstack.stackSize;
+                	props.SetEmbryo(embryo);
                 }
                 else
+                {
                 	return false;
+                }
             }
 
+            for (int var3 = 0; var3 < 7; ++var3)
+            {
+                double var4 = this.rand.nextGaussian() * 0.02D;
+                double var6 = this.rand.nextGaussian() * 0.02D;
+                double var8 = this.rand.nextGaussian() * 0.02D;
+                thisEntity.worldObj.spawnParticle("smoke", thisEntity.posX + (double)(this.rand.nextFloat() * thisEntity.width * 2.0F) - (double)thisEntity.width, thisEntity.posY + 0.5D + (double)(this.rand.nextFloat() * thisEntity.height), thisEntity.posZ + (double)(this.rand.nextFloat() * thisEntity.width * 2.0F) - (double)thisEntity.width, var4, var6, var8);
+            }
+            
             player.triggerAchievement(FossilAchievementHandler.IceAge);
             return true;
         }
 
         return false;
+    }
+    
+    private EnumAnimalType EmbryoSelector(ItemStack itemstack, EntityLivingBase thisEntity)
+    {
+        EnumAnimalType e0 = null;
+
+        if (itemstack.itemID == Fossil.embryoQuagga.itemID && thisEntity instanceof EntityHorse)
+            e0 = EnumAnimalType.Quagga;
+        
+        if (itemstack.itemID == Fossil.embryoChicken.itemID)
+        {
+            e0 = EnumAnimalType.Chicken;
+        }
+
+        if (itemstack.itemID == Fossil.embryoCow.itemID)
+        {
+            e0 = EnumAnimalType.Cow;
+        }
+        
+        if (itemstack.itemID == Fossil.embryoHorse.itemID)
+        {
+            e0 = EnumAnimalType.Horse;
+        }
+
+        if (itemstack.itemID == Fossil.embryoMammoth.itemID)
+        {
+            e0 = EnumAnimalType.Mammoth;
+        }
+
+        if (itemstack.itemID == Fossil.embryoPig.itemID)
+        {
+            e0 = EnumAnimalType.Pig;
+        }
+
+        if (itemstack.itemID == Fossil.embryoSmilodon.itemID)
+        {
+            e0 = EnumAnimalType.Smilodon;
+        }
+
+        if (itemstack.itemID == Fossil.embryoSheep.itemID)
+        {
+            e0 = EnumAnimalType.Sheep;
+        }
+        
+        if (e0 != null)
+        {
+            --itemstack.stackSize;
+    		return e0;
+        }
+		return null;
     }
 }
