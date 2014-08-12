@@ -1,16 +1,19 @@
 package mods.fossil.enchantments;
 
 import mods.fossil.Fossil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class EnchantmentPaleontology  extends Enchantment {
 	
 	private final int weight;
-
+	public World worldObj;
+	
 	public EnchantmentPaleontology(int effectID, int rarity, EnumEnchantmentType enchantmentType) {
 		super(effectID, rarity, enchantmentType);
 		this.setName("paleontology");
@@ -45,6 +48,34 @@ public class EnchantmentPaleontology  extends Enchantment {
     public int getMaxLevel()
     {
         return 3;
+    }
+    
+    //Allow clients to toggle whether or not they want to allow this enchantment on an enchantment table
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack)
+    {
+    		if(Fossil.FossilOptions.AllowTableEnchantments)
+    		{
+        		return canApply(stack);
+    		}
+    		else
+    		{
+    			return false;
+    		}
+    }
+    
+    //Allow clients to toggle whether or not they want to allow this enchantment on books on an enchantment table
+    @Override
+    public boolean isAllowedOnBooks()
+    {
+    		if(Fossil.FossilOptions.AllowBookEnchantments)
+    		{
+        		return true;
+    		}
+    		else
+    		{
+    			return false;
+    		}
     }
     
     public boolean canApply(ItemStack itemStack)
