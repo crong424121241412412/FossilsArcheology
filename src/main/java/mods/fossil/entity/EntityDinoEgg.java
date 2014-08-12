@@ -654,7 +654,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     		}
                     	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
                     			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
-                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         	{
                         		((EntityGallimimus)var5).setSubSpecies(2); //Blue
                         	}

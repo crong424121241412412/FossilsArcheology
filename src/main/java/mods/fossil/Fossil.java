@@ -130,6 +130,10 @@ import mods.fossil.items.ItemLivingCoelacanth;
 import mods.fossil.items.ItemMagicConch;
 import mods.fossil.items.ItemRibCage;
 import mods.fossil.items.ItemSkullHelmet;
+import mods.fossil.items.ItemSlabAncientStone;
+import mods.fossil.items.ItemSlabAncientWood;
+import mods.fossil.items.ItemSlabPalae;
+import mods.fossil.items.ItemSlabVolcanic;
 import mods.fossil.items.ItemStoneBoard;
 import mods.fossil.items.ItemWhip;
 import mods.fossil.items.forge.ForgeAxe;
@@ -196,7 +200,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.1a11";
+    public static final String modversion = "1.6.4 Build 6.3.1rc1";
 
     /*
      * Set mod state here
@@ -298,8 +302,8 @@ public class Fossil
     public static Block blockSifterIdle;
     public static Block blockSifterActive;
     public static Block volcanicStairs;
-    public static Block volcanicSingleSlab;
-    public static Block volcanicDoubleSlab;
+    public static BlockHalfSlab volcanicSingleSlab;
+    public static BlockHalfSlab volcanicDoubleSlab;
     public static Block vaseAmphoraBlock;
     public static Block vaseKylixBlock;
     public static Block vaseVoluteBlock;
@@ -926,8 +930,8 @@ public class Fossil
     {
         LanguageRegistry.instance().addStringLocalization("itemGroup." + this.modid, "en_US", this.modid);
         
-        paleontology = new EnchantmentPaleontology(e_paleontologyID, 17, EnumEnchantmentType.digger);
-        archeology = new EnchantmentArcheology(e_archeologyID, 17, EnumEnchantmentType.digger);
+        paleontology = new EnchantmentPaleontology(e_paleontologyID, 2, EnumEnchantmentType.digger);
+        archeology = new EnchantmentArcheology(e_archeologyID, 2, EnumEnchantmentType.digger);
         
         //Blocks
         skullLantern = new BlockFossilSkull(skullLanternID, true).setHardness(1.0F).setLightValue(0.9375F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName(LocalizationStrings.SKULL_LANTERN_NAME).setCreativeTab(this.tabFBlocks);
@@ -1130,8 +1134,8 @@ public class Fossil
         GameRegistry.registerBlock(palmLog, LocalizationStrings.PALAE_LOG_NAME);
         GameRegistry.registerBlock(palmLeaves, LocalizationStrings.PALAE_LEAVES_NAME);
         GameRegistry.registerBlock(palmSap, LocalizationStrings.PALAE_SAP_NAME);
-        GameRegistry.registerBlock(palaeSingleSlab, LocalizationStrings.PALAE_SINGLESLAB_NAME);
-        GameRegistry.registerBlock(palaeDoubleSlab, LocalizationStrings.PALAE_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(palaeSingleSlab, ItemSlabPalae.class, LocalizationStrings.PALAE_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(palaeDoubleSlab, ItemSlabPalae.class, LocalizationStrings.PALAE_DOUBLESLAB_NAME);
         GameRegistry.registerBlock(palaeStairs, LocalizationStrings.PALAE_STAIRS_NAME);
         GameRegistry.registerBlock(palaePlanks, LocalizationStrings.PALAE_PLANKS_NAME);
         GameRegistry.registerBlock(volcanicAsh, LocalizationStrings.VOLCANIC_ASH_NAME);
@@ -1147,17 +1151,16 @@ public class Fossil
         GameRegistry.registerBlock(ancientGlass, LocalizationStrings.ANCIENT_GLASS_NAME);
         GameRegistry.registerBlock(ancientWoodPlate, LocalizationStrings.ANCIENT_WOOD_PLATE_NAME);
         GameRegistry.registerBlock(ancientWoodStairs, LocalizationStrings.ANCIENT_WOOD_STAIRS_NAME);
-        GameRegistry.registerBlock(ancientWoodSingleSlab, LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME);
-        GameRegistry.registerBlock(ancientWoodDoubleSlab, LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(ancientWoodSingleSlab, ItemSlabAncientWood.class, LocalizationStrings.ANCIENT_WOOD_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(ancientWoodDoubleSlab, ItemSlabAncientWood.class, LocalizationStrings.ANCIENT_WOOD_DOUBLESLAB_NAME);
         GameRegistry.registerBlock(ancientStoneStairs, LocalizationStrings.ANCIENT_STONE_STAIRS_NAME);
-        GameRegistry.registerBlock(ancientStoneSingleSlab, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
-        GameRegistry.registerBlock(ancientStoneDoubleSlab, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
-        //GameRegistry.registerBlock(figurineBlock, modid + (figurineBlock.getUnlocalizedName().substring(5)));
+        GameRegistry.registerBlock(ancientStoneSingleSlab, ItemSlabAncientStone.class, LocalizationStrings.ANCIENT_STONE_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(ancientStoneDoubleSlab, ItemSlabAncientStone.class, LocalizationStrings.ANCIENT_STONE_DOUBLESLAB_NAME);
         GameRegistry.registerBlock(figurineBlock, BlockFigurineItem.class, modid + (figurineBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(blockSifterIdle, LocalizationStrings.BLOCK_SIFTER_IDLE);
         GameRegistry.registerBlock(volcanicStairs, LocalizationStrings.VOLCANIC_STAIRS);
-        GameRegistry.registerBlock(volcanicSingleSlab, LocalizationStrings.VOLCANIC_SINGLESLAB_NAME);
-        GameRegistry.registerBlock(volcanicDoubleSlab, LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
+        GameRegistry.registerBlock(volcanicSingleSlab, ItemSlabVolcanic.class, LocalizationStrings.VOLCANIC_SINGLESLAB_NAME);
+        GameRegistry.registerBlock(volcanicDoubleSlab, ItemSlabVolcanic.class, LocalizationStrings.VOLCANIC_DOUBLESLAB_NAME);
         GameRegistry.registerBlock(vaseVoluteBlock, BlockVaseVoluteItem.class, modid + (vaseVoluteBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(vaseAmphoraBlock, BlockVaseAmphoraItem.class, modid + (vaseAmphoraBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(vaseKylixBlock, BlockVaseKylixItem.class, modid + (vaseKylixBlock.getUnlocalizedName().substring(5)));
@@ -1266,9 +1269,9 @@ public class Fossil
     @Mod.EventHandler
     public void PostInit(FMLPostInitializationEvent event)
     {
-        Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
-        Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
-        Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
-        Item.itemsList[volcanicSingleSlab.blockID] = (new ItemSlab(volcanicSingleSlab.blockID - 256, (BlockHalfSlab)volcanicSingleSlab, (BlockHalfSlab)volcanicDoubleSlab, false));
+//        Item.itemsList[palaeSingleSlab.blockID] = (new ItemSlab(palaeSingleSlab.blockID - 256, (BlockHalfSlab)palaeSingleSlab, (BlockHalfSlab)palaeDoubleSlab, false));
+//        Item.itemsList[ancientWoodSingleSlab.blockID] = (new ItemSlab(ancientWoodSingleSlab.blockID - 256, (BlockHalfSlab)ancientWoodSingleSlab, (BlockHalfSlab)ancientWoodDoubleSlab, false));
+//        Item.itemsList[ancientStoneSingleSlab.blockID] = (new ItemSlab(ancientStoneSingleSlab.blockID - 256, (BlockHalfSlab)ancientStoneSingleSlab, (BlockHalfSlab)ancientStoneDoubleSlab, false));
+//        Item.itemsList[volcanicSingleSlab.blockID] = (new ItemSlab(volcanicSingleSlab.blockID - 256, (BlockHalfSlab)volcanicSingleSlab, (BlockHalfSlab)volcanicDoubleSlab, false));
     }
 }

@@ -899,7 +899,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
             String Status1 = StatCollector.translateToLocal(("status." + var1.toString() + ".head"));
             String Dino = this.SelfType.toString();
             String Status2 = StatCollector.translateToLocal("status." + var1.toString());
-            Fossil.ShowMessage(Status1 + Dino + Status2, (EntityPlayer)this.getOwner());
+            Fossil.ShowMessage(Status1 + Dino + " " + Status2, (EntityPlayer)this.getOwner());
         }
     }
 

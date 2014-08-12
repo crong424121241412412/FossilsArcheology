@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class BlockAncientStoneSlab extends BlockHalfSlab
 {
-    public static final String[] blockStepTypes = { "anicentStone" };
+    public static final String[] blockStepTypes = { "ancientStone" };
     private Icon theIcon;
 
     public BlockAncientStoneSlab(int par1, boolean par2)
@@ -37,21 +37,6 @@ public class BlockAncientStoneSlab extends BlockHalfSlab
     {
         return Fossil.ancientStoneSingleSlab.blockID;
     }
-    /*
-    	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
-    	{
-    		if(par1World.getBlockId(par2, par3 - 1, par4) == Fossil.palaeSingleSlab.blockID)
-    		{
-    			par1World.setBlock(par2, par3, par4, 0);
-    			par1World.setBlock(par2, par3 - 1, par4, Fossil.palaeDoubleSlab.blockID);
-    		}
-    		if(par1World.getBlockId(par2, par3 + 1, par4) == Fossil.palaeSingleSlab.blockID)
-    		{
-    			par1World.setBlock(par2, par3, par4, 0);
-    			par1World.setBlock(par2, par3 + 1, par4, Fossil.palaeDoubleSlab.blockID);
-    		}
-    	}
-    	*/
 
     protected ItemStack createStackedBlock(int par1)
     {

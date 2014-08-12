@@ -9,9 +9,12 @@ import net.minecraft.item.ItemStack;
 
 public class EnchantmentPaleontology  extends Enchantment {
 	
+	private final int weight;
+
 	public EnchantmentPaleontology(int effectID, int rarity, EnumEnchantmentType enchantmentType) {
 		super(effectID, rarity, enchantmentType);
 		this.setName("paleontology");
+		this.weight = 2;
 		this.type = enchantmentType;
 	}
 
@@ -23,6 +26,11 @@ public class EnchantmentPaleontology  extends Enchantment {
         return 5 + (par1 - 1) * 10;
     }
 
+    public int getWeight()
+    {
+        return this.weight;
+    }
+    
     /**
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
