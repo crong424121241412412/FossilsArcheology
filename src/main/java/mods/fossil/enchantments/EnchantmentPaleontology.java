@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 public class EnchantmentPaleontology  extends Enchantment {
 	
 	private final int weight;
-	public World worldObj;
 	
 	public EnchantmentPaleontology(int effectID, int rarity, EnumEnchantmentType enchantmentType) {
 		super(effectID, rarity, enchantmentType);

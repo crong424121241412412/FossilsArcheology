@@ -14,14 +14,12 @@ import net.minecraft.world.World;
 public class EnchantmentArcheology  extends Enchantment {
 	
 	private final int weight;
-	private boolean clientOverride;
 
 	public EnchantmentArcheology(int effectID, int rarity, EnumEnchantmentType enchantmentType) {
 		super(effectID, rarity, enchantmentType);
 		this.setName("archeology");
 		this.weight = 2;
 		this.type = enchantmentType;
-		this.clientOverride = false;
 	}
 
     /**
