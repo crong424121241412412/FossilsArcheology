@@ -200,7 +200,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.1rc2";
+    public static final String modversion = "1.6.4 Build 6.3.1";
 
     /*
      * Set mod state here
@@ -249,6 +249,10 @@ public class Fossil
 
     //public static WorldType fossil = new WorldTypeFossil(3, "Dino Test");
     
+    //Render IDs
+	public static int feederRenderID;
+
+	
   //enchantments
     public static Enchantment paleontology;
     public static Enchantment archeology;
@@ -889,6 +893,8 @@ public class Fossil
             FossilOptions.LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
             FossilOptions.Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
             FossilOptions.Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
+            FossilOptions.AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
+
             
             //Dinosaur Feathers
             FossilOptions.TRexFeathers = config.get("toggle_feathers", "TRex Feathers", false).getBoolean(false);
@@ -1218,6 +1224,9 @@ public class Fossil
         /*
         GameRegistry.registerWorldGenerator(new WorldGenWeaponShop());
         */
+        
+        feederRenderID = RenderingRegistry.getNextAvailableRenderId();
+
         
         NetworkRegistry.instance().registerChatListener(messagerHandler);
         NetworkRegistry.instance().registerGuiHandler(this, GH);

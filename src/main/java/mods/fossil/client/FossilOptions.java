@@ -25,6 +25,7 @@ public class FossilOptions
 	public static boolean GallimimusFeathers;
 	public static boolean AllowTableEnchantments;
 	public static boolean AllowBookEnchantments;
+	public static boolean AllowBreeding;
 
     public void Load(Configuration config)
     {
@@ -39,6 +40,8 @@ public class FossilOptions
         LoginMessage = config.get("option", "Display_Login_Message", true).getBoolean(false);
         Anu_Spawn = config.get("option", "Anu_Spawn", false).getBoolean(false);
         Anu_Allowed_Overworld = config.get("option", "Anu_Allowed_Overworld", false).getBoolean(false);
+        AllowBreeding = config.get("option", "Allow_Dinosaur_Breeding", true).getBoolean(true);
+
         
         TRexFeathers = config.get("toggle_feathers",  "Trex Feathers", false).getBoolean(false);
         DeinonychusFeathers = config.get("toggle_feathers",  "Deinonychus Feathers", true).getBoolean(true);

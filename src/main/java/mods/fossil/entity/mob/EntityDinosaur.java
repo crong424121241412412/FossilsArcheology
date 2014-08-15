@@ -19,6 +19,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.fossilEnums.EnumOrderType;
 import mods.fossil.fossilEnums.EnumSituation;
 import mods.fossil.guiBlocks.TileEntityFeeder;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentThorns;
@@ -783,7 +784,6 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     public void HandleBreed()
     {
-
         if (this.isAdult())
         {
             --this.BreedTick;
@@ -822,9 +822,11 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     var5 = new EntityDinoEgg(this.worldObj, this.SelfType);
                     ((Entity)var5).setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
-                    if (this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
-                    {
-                    	this.worldObj.spawnEntityInWorld((Entity)var5);
+                    if(this.worldObj.isRemote){
+	                    if (this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
+	                    {
+	                    	this.worldObj.spawnEntityInWorld((Entity)var5);
+	                    }
                     }
 
                     //this.showHeartsOrSmokeFX(true);
@@ -1342,7 +1344,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
     public void onLivingUpdate()
     {
     	if(!this.isModelized()){
-	        this.HandleBreed();
+    		if(!this.worldObj.isRemote)
+    		{
+    			if(Fossil.FossilOptions.AllowBreeding)
+    			{
+    		        this.HandleBreed();
+    			}
+    		}
 	        super.onLivingUpdate();
     	}
     }
