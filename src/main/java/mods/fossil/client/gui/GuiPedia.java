@@ -1,7 +1,13 @@
 package mods.fossil.client.gui;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import mods.fossil.Fossil;
@@ -119,6 +125,15 @@ public class GuiPedia extends GuiContainer
         this.fontRenderer.drawString(str0, 30 + (left0 ? 0 : 121), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
     }
     
+    /**
+     * Add a String to the left or right side, starting with 0
+     * Also set the offset for margin position. Useful when using odd sized text.
+     */
+    public void AddStringLR(String str0, int marginOffset, boolean left0)
+    {
+        this.fontRenderer.drawString(str0, 30 + (left0 ? 0+marginOffset : 121+marginOffset), 12 * ((left0 ? this.left++ : this.right++) + 1), 4210752);
+    }
+    
     public void AddStringLR(String str0, boolean left0, int r, int g, int b)
     {
         int col = (r << 16) | (g << 8) | b;
@@ -130,6 +145,7 @@ public class GuiPedia extends GuiContainer
     public void PrintStringXY(String str0, int x0, int y0)
     {
         this.fontRenderer.drawString(str0, x0, y0, 4210752);
+        this.fontRenderer.FONT_HEIGHT = 4;
     }
     public void PrintStringXY(String str0, int x0, int y0, int r, int g, int b)
     {
@@ -268,6 +284,43 @@ public class GuiPedia extends GuiContainer
         {
             ((EntityGastornis)Fossil.ToPedia).ShowPedia(this);
         }
+    	}
+    	else
+    	{
+            if (Fossil.ToPedia instanceof EntityDinosaur)
+            {
+                ((EntityDinosaur)Fossil.ToPedia).ShowPedia2(this);
+            }
+            
+            if (Fossil.ToPedia instanceof EntityMammoth)
+            {
+                ((EntityMammoth)Fossil.ToPedia).ShowPedia2(this);
+            }
+
+            if (Fossil.ToPedia instanceof EntitySmilodon)
+            {
+                ((EntitySmilodon)Fossil.ToPedia).ShowPedia2(this);
+            }
+
+            if (Fossil.ToPedia instanceof EntityDodo)
+            {
+                ((EntityDodo)Fossil.ToPedia).ShowPedia2(this);
+            }
+            
+            if (Fossil.ToPedia instanceof EntityCoelacanth)
+            {
+                ((EntityCoelacanth)Fossil.ToPedia).ShowPedia2(this);
+            }
+            
+            if (Fossil.ToPedia instanceof EntityNautilus)
+            {
+                ((EntityNautilus)Fossil.ToPedia).ShowPedia2(this);
+            }
+
+            if (Fossil.ToPedia instanceof EntityQuagga)
+            {
+                ((EntityQuagga)Fossil.ToPedia).ShowPedia2(this);
+            }
     	}
     }
 

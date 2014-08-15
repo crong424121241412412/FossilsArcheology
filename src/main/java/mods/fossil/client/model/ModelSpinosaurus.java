@@ -219,7 +219,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
         Thigh1.mirror = true;
         setRotation(Thigh1, -0.2617994F, 0F, 0F);
         Calf1 = new ModelRenderer(this, "Calf1");
-        Calf1.setRotationPoint(0F, 5F, 1F);
+        Calf1.setRotationPoint(-0.1F, 5F, 1.1F);
 //      setRotation(Calf1, -0.2617994F, 0F, 0F);
         Calf1.addBox("Calf1piece", 0F, 0F, 0F, 2, 6, 3);
         Foot1 = new ModelRenderer(this, "Foot1");
@@ -241,7 +241,7 @@ public class ModelSpinosaurus extends ModelDinosaurs
         setRotation(Thigh2, -0.2617994F, 0F, 0F);
         Calf2 = new ModelRenderer(this, "Calf2");
         Calf2.addBox("Calf2piece", 0F, 0F, 0F, 2, 6, 3);
-        Calf2.setRotationPoint(0F, 5F, 1F);
+        Calf2.setRotationPoint(0.1F, 5F, 1.1F);
         Calf2.setTextureSize(64, 64);
         Calf2.mirror = true;
 //      setRotation(Calf2, -0.2617994F, 0F, 0F);

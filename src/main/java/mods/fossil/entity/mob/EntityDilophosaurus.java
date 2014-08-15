@@ -364,47 +364,47 @@ public class EntityDilophosaurus extends EntityDinosaur
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource var1, float var2)
+    public boolean attackEntityFrom(DamageSource damagesource, float damageamount)
     {
-        Entity var3 = var1.getEntity();
+        Entity attackingEntity = damagesource.getEntity();
         boolean var4 = false;
         this.setSitting(false);
 
-        if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
+        if (attackingEntity != null && !(attackingEntity instanceof EntityPlayer) && !(attackingEntity instanceof EntityArrow))
         {
-            var2 = (var2 + 1) / 2;
+            damageamount = (damageamount + 1) / 2;
         }
 
-        if (super.attackEntityFrom(var1, var2))
+        if (super.attackEntityFrom(damagesource, damageamount))
         {
             if (!this.isAngry())
             {
-                if (var3 instanceof EntityArrow && ((EntityArrow)var3).shootingEntity != null)
+                if (attackingEntity instanceof EntityArrow && ((EntityArrow)attackingEntity).shootingEntity != null)
                 {
-                    var3 = ((EntityArrow)var3).shootingEntity;
+                    attackingEntity = ((EntityArrow)attackingEntity).shootingEntity;
                 }
 
-                if (var3 instanceof EntityLiving)
+                if (attackingEntity instanceof EntityLiving)
                 {
-                    this.setTarget((EntityLiving)var3);
+                    this.setTarget((EntityLiving)attackingEntity);
                 }
 
-                if (var3 instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)var3).username.equalsIgnoreCase(this.getOwnerName()))
+                if (attackingEntity instanceof EntityPlayer && this.isTamed() && ((EntityPlayer)attackingEntity).username.equalsIgnoreCase(this.getOwnerName()))
                 {
                     //Hit by the owner->untame
+                    this.SendStatusMessage(EnumSituation.Betrayed);
                     this.setTamed(false);
                     this.setOwner("");
-                    this.SendStatusMessage(EnumSituation.Betrayed);
                     this.ItemInMouth = null;
                     this.setAngry(true);
-                    this.setTarget((EntityLiving)var3);
+                    this.setTarget((EntityLiving)attackingEntity);
                     this.PreyChecked = true;
                     var4 = true;
                 }
             }
-            else if (var3 != this && var3 != null)
+            else if (attackingEntity != this && attackingEntity != null)
             {
-                this.entityToAttack = var3;
+                this.entityToAttack = attackingEntity;
             }
 
             return true;
@@ -645,7 +645,9 @@ public class EntityDilophosaurus extends EntityDinosaur
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntityDilophosaurus baby = new EntityDilophosaurus(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     /**

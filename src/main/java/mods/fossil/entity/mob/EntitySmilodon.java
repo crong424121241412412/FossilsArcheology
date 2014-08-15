@@ -1,5 +1,12 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.lwjgl.opengl.GL11;
+
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
 import mods.fossil.client.LocalizationStrings;
@@ -740,6 +747,13 @@ public class EntitySmilodon extends EntityPrehistoric
         */
 
         //TODO show all blocks the dino can eat
+    }
+    
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	super.ShowPedia2(p0, "Smilodon");
     }
 
     public boolean isAngry()

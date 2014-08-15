@@ -129,7 +129,6 @@ public class EntityBones extends EntityMob
             {
                 return null;
             }
-		}
     }
 
     /**

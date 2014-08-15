@@ -1,5 +1,12 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.lwjgl.opengl.GL11;
+
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
 import mods.fossil.client.gui.GuiPedia;
@@ -77,6 +84,8 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
     private int field_110285_bP;
     private String horseTexture;
     private String[] combinedTexturePath = new String[3];
+
+	EntityPrehistoric entityPrehistoricClass = new EntityPrehistoric(worldObj);
 
     public EntityQuagga(World par1World)
     {
@@ -1565,5 +1574,11 @@ public class EntityQuagga extends EntityAnimal implements IInvBasic
             p0.AddStringLR(StatCollector.translateToLocal(LocalizationStrings.PEDIA_TEXT_RIDEABLE), true);   
 
         //TODO show all blocks the dino can eat
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	entityPrehistoricClass.ShowPedia2(p0, "Quagga");
     }
 }

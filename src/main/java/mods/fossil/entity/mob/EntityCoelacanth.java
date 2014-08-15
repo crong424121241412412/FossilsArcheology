@@ -1,7 +1,13 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Random;
+
+import org.lwjgl.opengl.GL11;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
@@ -62,10 +68,12 @@ public class EntityCoelacanth extends EntityWaterMob {
     private float randomMotionVecY;
     private float randomMotionVecZ;
     
+	EntityPrehistoric entityPrehistoricClass = new EntityPrehistoric(worldObj);
+	
     public EntityCoelacanth(World par1World)
     {
         super(par1World);
-        
+
         this.setSize(this.width * 3.5F, this.height * 0.5F);
         
   //      this.setSize(this.width * 6.0F, this.height * 6.0F);
@@ -207,6 +215,12 @@ public class EntityCoelacanth extends EntityWaterMob {
             p0.AddStringLR("No Despawn", true);
         }
  //       p0.PrintPictXY(ocean, 120, 7, 4, 4);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	entityPrehistoricClass.ShowPedia2(p0, "Coelacanth");
     }
     
     /**

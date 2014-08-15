@@ -1,6 +1,12 @@
 package mods.fossil.entity.mob;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import org.lwjgl.opengl.GL11;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.DinoSound;
@@ -403,6 +409,13 @@ public class EntityMammoth extends EntityPrehistoric implements IShearable
         */
 
         //TODO show all blocks the dino can eat
+    }
+    
+    
+    @SideOnly(Side.CLIENT)
+    public void ShowPedia2(GuiPedia p0)
+    {
+    	super.ShowPedia2(p0, "Mammoth");
     }
 
     public EntityAnimal spawnBabyAnimal(EntityAnimal var1)

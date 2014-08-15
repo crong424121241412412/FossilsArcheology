@@ -5,6 +5,7 @@ import mods.fossil.entity.mob.EntityDinosaur;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.world.World;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -18,6 +19,8 @@ public class DinoAIHunt extends EntityAITarget
     private DinoAINearestAttackableTargetSorter targetSorter;
     private final Class targetClass;
     
+	World theWorld;
+    
     /**
      * This filter is applied to the Entity search.  Only matching entities will be targetted.  (null -> no
      * restrictions)
@@ -30,6 +33,7 @@ public class DinoAIHunt extends EntityAITarget
     public DinoAIHunt(EntityDinosaur dinosaur, Class _class, int range, boolean par4)
     {
         super(dinosaur, par4);
+        this.theWorld = dinosaur.worldObj;
         this.dinosaur = dinosaur;
         this.targetClass = _class;
         this.SEARCH_RANGE = range;
@@ -39,7 +43,14 @@ public class DinoAIHunt extends EntityAITarget
     @Override
     public boolean shouldExecute()
     {
-        if (this.dinosaur.IsHungry() &&  !this.dinosaur.SelfType.FoodMobList.IsEmpty())
+    	
+        if(!theWorld.isRemote)
+        {
+	        if (!Fossil.FossilOptions.Dinos_Starve)
+	        	return false;
+        }
+        
+        if ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) &&  !this.dinosaur.SelfType.FoodMobList.IsEmpty())
         {
         double d0 = this.getTargetDistance();
         

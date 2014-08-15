@@ -45,6 +45,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     public String ParentOwner;
     private int HatchTime;
     public final int HatchingNeedTime;
+	private boolean isWarm;
     private static int lastBirthTick;
     public static final int HATCHING_INDEX = 18;
 
@@ -61,6 +62,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         this.yOffset = this.height;
         this.DinoInside = var2;
         this.lastBirthTick = 0;
+        this.isWarm = true;
     }
 
     /**
@@ -433,11 +435,12 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             {
             	this.lastBirthTick = this.getBirthTick();
                 this.setBirthTick(this.getBirthTick() + 1);
-                
+                this.isWarm = true;
             }
             else
             {
                 this.setBirthTick(this.getBirthTick() - 1);
+                this.isWarm = false;
             }
              
         }
@@ -445,7 +448,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         {
         	this.lastBirthTick = this.getBirthTick();
             this.setBirthTick(this.getBirthTick() + 1);
-            
+            this.isWarm = true;
         }
         else
         {
@@ -455,6 +458,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
             if ((var6 <= 0.15F && brightness < 0.5) || this.inWater)
             {
                 this.setBirthTick(this.getBirthTick() - 1);
+                this.isWarm = false;
             }
         }
 
@@ -654,7 +658,8 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                     		}
                     	else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
                     			|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
-                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER))
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WATER)
+                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
                         	{
                         		((EntityGallimimus)var5).setSubSpecies(2); //Blue
                         	}
@@ -817,7 +822,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
         }
         else
         {
-            if ((this.getBirthTick() >= 0 && this.getBirthTick() > this.lastBirthTick) || this.getBirthTick() >= 100)
+            if ((this.getBirthTick() >= 0 || this.getBirthTick() >= 100) && this.isWarm)
             {
                 stat = StatCollector.translateToLocal(LocalizationStrings.PEDIA_EGG_WARM);
             }

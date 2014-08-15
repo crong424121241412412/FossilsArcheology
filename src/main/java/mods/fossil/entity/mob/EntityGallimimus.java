@@ -28,6 +28,9 @@ public class EntityGallimimus extends EntityDinosaur
     public static final double maxHealth = EnumDinoType.Gallimimus.HealthMax;
     public static final double maxDamage = EnumDinoType.Gallimimus.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Gallimimus.SpeedMax;
+    
+	private final String texturePath;
+
 
     public EntityGallimimus(World var1)
     {
@@ -44,6 +47,11 @@ public class EntityGallimimus extends EntityDinosaur
         // Size of dinosaur at age Adult.
         this.maxSize = 2.2F;
         
+    	if(Fossil.FossilOptions.GallimimusFeathers)
+            texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+    	else
+    		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
+    	
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.2F));
@@ -88,14 +96,14 @@ public class EntityGallimimus extends EntityDinosaur
         switch (this.getSubSpecies())
         {
         case 1:
-        	return Fossil.modid + ":" + "textures/mob/Gallimimus_Green.png";
+        	return texturePath + "Gallimimus_Green.png";
         case 2:
-        	return Fossil.modid + ":" + "textures/mob/Gallimimus_Light Blue.png";
+        	return texturePath + "Gallimimus_Light_Blue.png";
         case 3:
-        	return Fossil.modid + ":" + "textures/mob/Gallimimus_Orange.png";
+        	return texturePath + "Gallimimus_Orange.png";
         case 4:
             default:
-                return Fossil.modid + ":" + "textures/mob/Gallimimus_Brown.png";
+                return texturePath + "Gallimimus_Brown.png";
         }
     }
     

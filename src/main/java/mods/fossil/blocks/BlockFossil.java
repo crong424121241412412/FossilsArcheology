@@ -60,6 +60,21 @@ public class BlockFossil extends BlockStone
         {
             return Fossil.foot.itemID;
         }
+        
+        if (i < 21)
+        {
+            return Fossil.vertebrae.itemID;
+        }
+        
+        if (i < 23)
+        {
+            return Fossil.armBone.itemID;
+        }
+        
+        if (i < 25)
+        {
+            return Fossil.dinoRibCage.itemID;
+        }
 
         if (i < 50)
         {

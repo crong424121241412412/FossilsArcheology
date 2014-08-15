@@ -40,6 +40,7 @@ public class EntityTRex extends EntityDinosaur
     //private final BlockBreakingRule blockBreakingBehavior;
     final EntityAIControlledByPlayer aiControlledByPlayer;
 	private int Timer;
+	private final String texturePath;
     
     public static final double baseHealth = EnumDinoType.TRex.Health0;
     public static final double baseDamage = EnumDinoType.TRex.Strength0;
@@ -65,6 +66,11 @@ public class EntityTRex extends EntityDinosaur
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 4.5F;
+        
+    	if(Fossil.FossilOptions.TRexFeathers)
+            texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/feathered/" + "Feathered_";
+    	else
+    		texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -509,14 +515,15 @@ public class EntityTRex extends EntityDinosaur
             return super.getTexture();
         }
 
+
         if (this.isWeak())
         {
             switch (this.getSubSpecies())
             {
             case 1:
-            	return Fossil.modid + ":textures/mob/TRex_Green_Weak.png";
+            	return texturePath + "TRex_Green_Weak.png";
             default:
-            	return Fossil.modid + ":textures/mob/TRex_Weak.png";
+            	return texturePath + "TRex_Weak.png";
             }
 
         }
@@ -526,18 +533,18 @@ public class EntityTRex extends EntityDinosaur
             switch (this.getSubSpecies())
             {
             case 1:
-            	return Fossil.modid + ":textures/mob/TRex_Green_Adult.png";
+            	return texturePath + "TRex_Green_Adult.png";
             default:
-            	return Fossil.modid + ":textures/mob/TRex_Adult.png";
+            	return texturePath + "TRex_Adult.png";
             }
         }
         
         switch (this.getSubSpecies())
         {
         case 1:
-        	return Fossil.modid + ":textures/mob/TRex_Green_Tame.png";
+        	return texturePath + "TRex_Green_Tame.png";
         default:
-        	return Fossil.modid + ":textures/mob/TRex_Tame.png";
+        	return texturePath + "TRex_Tame.png";
         }
     }
 
@@ -686,7 +693,9 @@ public class EntityTRex extends EntityDinosaur
     @Override
     public EntityAgeable createChild(EntityAgeable var1)
     {
-        return null;
+    	EntityTRex baby = new EntityTRex(this.worldObj);
+    	baby.setSubSpecies(this.getSubSpecies());
+    	return baby;
     }
     
     

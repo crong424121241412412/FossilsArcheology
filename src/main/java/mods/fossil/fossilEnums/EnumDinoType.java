@@ -18,12 +18,14 @@ interface C
     public static final int RIDE = 1 << 4; //Bit 4: Dino is Rideable
     public static final int CARRY = 1 << 5; //Bit 5: Dino can Carry Items
 }
-
+/*
+ * Do not change the order of this enum. Only add to the end of it.
+ */
 public enum EnumDinoType
 {
     //													C.MODEL	| C.TAME	| C.RIDE	| C.HERBIVORE/CARNIVORE | C.CARRY
     Triceratops(EntityTriceratops.class, 				C.MODEL | C.TAME  	| C.RIDE 	| C.HERBIVORE),
-    Velociraptor(EntityVelociraptor.class,						  C.TAME  				| C.CARNIVORE),
+    Velociraptor(EntityVelociraptor.class,					      C.TAME  				| C.CARNIVORE),
     TRex(EntityTRex.class, 								C.MODEL | C.TAME    | C.RIDE  	| C.CARNIVORE),
     Pterosaur(EntityPterosaur.class, 					C.MODEL | C.TAME  			 	| C.CARNIVORE),
     Nautilus(EntityNautilus.class, 						C.NOTHING),
@@ -35,9 +37,9 @@ public enum EnumDinoType
     Spinosaurus(EntitySpinosaurus.class, 				C.MODEL 						| C.CARNIVORE),
     Compsognathus(EntityCompsognathus.class,			C.MODEL | C.TAME				| C.CARNIVORE),
     Ankylosaurus(EntityAnkylosaurus.class,  			C.MODEL | C.TAME  	| C.RIDE  	| C.HERBIVORE),
-    Pachycephalosaurus(EntityPachycephalosaurus.class, 			  C.TAME 				| C.HERBIVORE),
+    Pachycephalosaurus(EntityPachycephalosaurus.class, 	          C.TAME 				| C.HERBIVORE),
     Deinonychus(EntityDeinonychus.class,				C.MODEL | C.TAME  				| C.CARNIVORE),
-    Gallimimus(EntityGallimimus.class,							  C.TAME	| C.RIDE	| C.HERB_CARN),
+    Gallimimus(EntityGallimimus.class,						      C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
     //Gastornis(EntityGastornis.class, 							  C.TAME	| C.RIDE	| C.CARNIVORE),
     ;
@@ -330,7 +332,7 @@ public enum EnumDinoType
         Velociraptor.setItems(Item.bone);  //,			Fossil.rawVelociraptor, Fossil.dnaVelociraptor, Fossil.eggVelociraptor);
         Velociraptor.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
         Velociraptor.setAges(3, 6, -1);
-        Velociraptor.setProperties(3.0D, 16.0D, 2.0D, 7.0D, 0.25D, 0.35D, 150);
+        Velociraptor.setProperties(3.0D, 12.0D, 2.0D, 7.0D, 0.25D, 0.35D, 150);
         Velociraptor.setExperience(0.7F, 0.7F);
         Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
         Velociraptor.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
@@ -413,7 +415,7 @@ public enum EnumDinoType
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Deinonychus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Ankylosaurus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Pachycephalosaurus);
-        TRex.FoodItemList.addItem(EnumDinoFoodItem.Gallimimus);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Gallimimus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         
         Pterosaur.setItems(Item.arrow);   //,			Fossil.rawPterosaur, 	Fossil.dnaPterosaur, 	Fossil.eggPterosaur);
@@ -562,7 +564,7 @@ public enum EnumDinoType
         Deinonychus.setItems(Item.bone);  //,			Fossil.rawDeinonychus, Fossil.dnaDeinonychus, Fossil.eggDeinonychus);
         Deinonychus.setDimensions(0.3F, 0.12F, 0.3F, 0.13F, 0.3F, 0.1F);
         Deinonychus.setAges(4, 10, -1);
-        Deinonychus.setProperties(5.0D, 11.0D, 2.0D, 10.0D, 0.23D, 0.35D, 200);
+        Deinonychus.setProperties(5.0D, 16.0D, 2.0D, 10.0D, 0.23D, 0.35D, 200);
         Deinonychus.setExperience(0.7F, 0.7F);
         Deinonychus.FoodItemList.addItem(EnumDinoFoodItem.PorkRaw);
         Deinonychus.FoodItemList.addItem(EnumDinoFoodItem.PorkCooked);
