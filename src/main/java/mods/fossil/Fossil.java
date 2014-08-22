@@ -59,12 +59,12 @@ import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityMLighting;
 import mods.fossil.entity.EntityStoneboard;
+import mods.fossil.entity.EntityTerrorBirdEgg;
 import mods.fossil.entity.mob.EntityBones;
 import mods.fossil.entity.mob.EntityCoelacanth;
 import mods.fossil.entity.mob.EntityDodo;
 import mods.fossil.entity.mob.EntityFailuresaurus;
 import mods.fossil.entity.mob.EntityFriendlyPigZombie;
-import mods.fossil.entity.mob.EntityGastornis;
 import mods.fossil.entity.mob.EntityMammoth;
 import mods.fossil.entity.mob.EntityNautilus;
 import mods.fossil.entity.mob.EntityPigBoss;
@@ -74,6 +74,7 @@ import mods.fossil.entity.mob.EntityPregnantPig;
 import mods.fossil.entity.mob.EntityPregnantSheep;
 import mods.fossil.entity.mob.EntityQuagga;
 import mods.fossil.entity.mob.EntitySmilodon;
+import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.fossilEnums.EnumDinoFoodMob;
 import mods.fossil.fossilEnums.EnumDinoType;
 import mods.fossil.gens.AcademyGenerator;
@@ -135,6 +136,7 @@ import mods.fossil.items.ItemSlabAncientWood;
 import mods.fossil.items.ItemSlabPalae;
 import mods.fossil.items.ItemSlabVolcanic;
 import mods.fossil.items.ItemStoneBoard;
+import mods.fossil.items.ItemTerrorBirdEgg;
 import mods.fossil.items.ItemWhip;
 import mods.fossil.items.forge.ForgeAxe;
 import mods.fossil.items.forge.ForgeFood;
@@ -200,7 +202,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.1";
+    public static final String modversion = "1.6.4 Build 6.3.2a2";
 
     /*
      * Set mod state here
@@ -369,6 +371,12 @@ public class Fossil
     public static Item armBone;
     public static Item dinoRibCage;
     public static Item vertebrae;
+    public static Item terrorBirdEgg;
+    public static Item cultivatedTerrorBirdEgg;
+    public static Item terrorBirdMeat;
+    public static Item terrorBirdMeatCooked;
+    public static Item quaggaMeat;
+    public static Item quaggaMeatCooked;
 
     //Armor
     public static Item skullHelmet;
@@ -405,6 +413,7 @@ public class Fossil
     public static Item dnaCoelacanth;
     public static Item dnaHorse;
     public static Item dnaQuagga;
+    public static Item dnaTerrorBird;
 
     //Mob DNA
     //public static Item mobDNA;
@@ -572,6 +581,12 @@ public class Fossil
     public static int armBoneID;
     public static int dinoRibCageID;
     public static int vertebraeID;
+    public static int terrorBirdEggID;
+    public static int cultivatedTerrorBirdEggID;
+    public static int terrorBirdMeatID;
+    public static int terrorBirdMeatCookedID;
+    public static int quaggaMeatID;
+    public static int quaggaMeatCookedID;
 
     //Armor
     public static int skullHelmetID;
@@ -608,6 +623,7 @@ public class Fossil
     public static int dnaCoelacanthID;
     public static int dnaHorseID;
     public static int dnaQuaggaID;
+    public static int dnaTerrorBirdID;
 
     //Mob DNA
     //public static int mobDNAID;
@@ -796,6 +812,7 @@ public class Fossil
             fossilRecordID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.FOSSILRECORD_NAME, 10045).getInt();
             livingCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LIVING_COELACANTH_NAME, 10046).getInt();
 
+
             //Armor
             skullHelmetID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.SKULL_HELMET_NAME, 10047).getInt();
             ribCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.RIBCAGE_NAME, 10048).getInt();
@@ -881,6 +898,14 @@ public class Fossil
             armBoneID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ARM_BONE_NAME, 10203).getInt();
             dinoRibCageID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_RIB_CAGE_NAME, 10204).getInt();
             vertebraeID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.VERTEBRAE_NAME, 10205).getInt();
+            
+            terrorBirdEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.TERROR_BIRD_EGG_NAME, 10206).getInt();
+            cultivatedTerrorBirdEggID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.CULTIVATED_TERROR_BIRD_EGG_NAME, 10207).getInt();
+            dnaTerrorBirdID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_TERROR_BIRD_NAME, 10208).getInt();
+            terrorBirdMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.TERROR_BIRD_MEAT, 10209).getInt();
+            terrorBirdMeatCookedID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.TERROR_BIRD_MEAT_COOKED, 10210).getInt();
+            quaggaMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.QUAGGA_MEAT, 10211).getInt();
+            quaggaMeatCookedID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.QUAGGA_MEAT_COOKED, 10212).getInt();
 
             //Config options
             FossilOptions.Gen_Palaeoraphe = config.get("option", "Palaeoraphe", false).getBoolean(false);
@@ -1048,6 +1073,8 @@ public class Fossil
         potteryShards = new ForgeItem(potteryShardsID, "PotteryShard").setUnlocalizedName(LocalizationStrings.POTTERY_SHARDS).setCreativeTab(this.tabFItems);
        // brokenHeadRelic = new ItemHeadRelic(brokenHeadRelicID, RELIC, 3, 0).setUnlocalizedName(LocalizationStrings.BROKEN_HEAD_RELIC).setCreativeTab(Fossil.tabFTest);
         livingCoelacanth = new ItemLivingCoelacanth(livingCoelacanthID, 1).setUnlocalizedName(LocalizationStrings.LIVING_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
+        terrorBirdEgg = new ItemTerrorBirdEgg(terrorBirdEggID, false).setUnlocalizedName(LocalizationStrings.TERROR_BIRD_EGG_NAME);
+        cultivatedTerrorBirdEgg = new ItemTerrorBirdEgg(cultivatedTerrorBirdEggID, true).setUnlocalizedName(LocalizationStrings.CULTIVATED_TERROR_BIRD_EGG_NAME);
        
         //BoneArmor
         skullHelmet = new ItemSkullHelmet(skullHelmetID, bone, 3, 0).setUnlocalizedName(LocalizationStrings.SKULL_HELMET_NAME).setCreativeTab(Fossil.tabFCombat);
@@ -1082,6 +1109,7 @@ public class Fossil
         dnaCoelacanth = new ForgeItem(dnaCoelacanthID, "Coelacanth_DNA").setUnlocalizedName(LocalizationStrings.DNA_COELACANTH_NAME).setCreativeTab(this.tabFMaterial);
         dnaHorse = new ForgeItem(dnaHorseID, "Horse_DNA").setUnlocalizedName(LocalizationStrings.DNA_HORSE_NAME).setCreativeTab(this.tabFMaterial);
         dnaQuagga = new ForgeItem(dnaQuaggaID, "Quagga_DNA").setUnlocalizedName(LocalizationStrings.DNA_QUAGGA_NAME).setCreativeTab(this.tabFMaterial);
+        dnaTerrorBird = new ForgeItem(dnaTerrorBirdID, "TerrorBird/TerrorBird_DNA").setUnlocalizedName(LocalizationStrings.DNA_TERROR_BIRD_NAME).setCreativeTab(this.tabFMaterial);
 
         //Ebryos
         //embyoSyringe = new ItemEmbryoSyringe(embyoSyringeID);
@@ -1106,9 +1134,14 @@ public class Fossil
         rawChickenSoup = new ForgeItem(rawChickenSoupID, "Raw_Chicken_Soup").setUnlocalizedName(LocalizationStrings.RAW_CHICKEN_SOUP_NAME).setMaxStackSize(1).setContainerItem(Item.bucketEmpty).setCreativeTab(this.tabFFood);
         chickenEss = new ItemChickenEss(chickenEssID, 10, 0.0F, false, "Essence_Of_Chicken").setUnlocalizedName(LocalizationStrings.EOC_NAME).setContainerItem(Item.glassBottle).setCreativeTab(this.tabFFood);
         sjl = new ForgeFood(sjlID, 8, 2.0F, false, "Sio_Chiu_Le").setUnlocalizedName(LocalizationStrings.SJL_NAME).setCreativeTab(this.tabFFood);
-        dodoWing = new ForgeFood(dodoWingID, 8, 0.8F, true, "Raw_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODO_WING_NAME).setCreativeTab(this.tabFFood);
-        dodoWingCooked = new ForgeFood(dodoWingCookedID, 8, 0.8F, true, "Cooked_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
-//        figurineItem = new ItemFigurine(figurineItemID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME).setCreativeTab(this.tabFTest);
+        dodoWing = new ForgeFood(dodoWingID,3, 0.3F, false, "Raw_Dodo_Wing").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.DODO_WING_NAME).setCreativeTab(this.tabFFood);
+        dodoWingCooked = new ForgeFood(dodoWingCookedID,8, 0.8F, false, "Cooked_Dodo_Wing").setUnlocalizedName(LocalizationStrings.DODO_WING_COOKED_NAME).setCreativeTab(this.tabFFood);
+        terrorBirdMeat = new ForgeFood(terrorBirdMeatID, 2, 0.8F, false, "TerrorBird/TerrorBird_Meat").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.TERROR_BIRD_MEAT).setCreativeTab(this.tabFFood);
+        terrorBirdMeatCooked = new ForgeFood(terrorBirdMeatCookedID, 4, 0.8F, false, "TerrorBird/TerrorBird_Meat_Cooked").setUnlocalizedName(LocalizationStrings.TERROR_BIRD_MEAT_COOKED).setCreativeTab(this.tabFFood);
+        quaggaMeat = new ForgeFood(quaggaMeatID, 2, 0.8F, false, "Quagga_Meat").setPotionEffect(Potion.hunger.id, 30, 0, 0.3F).setUnlocalizedName(LocalizationStrings.QUAGGA_MEAT).setCreativeTab(this.tabFFood);
+        quaggaMeatCooked = new ForgeFood(quaggaMeatCookedID, 7, 1F, false, "Quagga_Meat_Cooked").setUnlocalizedName(LocalizationStrings.QUAGGA_MEAT_COOKED).setCreativeTab(this.tabFFood);
+
+        //        figurineItem = new ItemFigurine(figurineItemID).setUnlocalizedName(LocalizationStrings.FIGURINE_NAME).setCreativeTab(this.tabFTest);
         // Music Discs
         fossilrecordBones = new ItemFossilRecord(fossilRecordID, "fossil:record_bones").setUnlocalizedName(LocalizationStrings.FOSSILRECORD_NAME);
         //Initiate some other things...
@@ -1175,26 +1208,28 @@ public class Fossil
         GameRegistry.registerBlock(vaseAmphoraBlock, BlockVaseAmphoraItem.class, modid + (vaseAmphoraBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(vaseKylixBlock, BlockVaseKylixItem.class, modid + (vaseKylixBlock.getUnlocalizedName().substring(5)));
         
-        EntityRegistry.registerModEntity(EntityStoneboard.class, 		"StoneBoard", 			1, this, 250, Integer.MAX_VALUE, false);
-        EntityRegistry.registerModEntity(EntityJavelin.class, 			"Javelin", 				2, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityAncientJavelin.class, 	"AncientJavelin", 		3, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityMLighting.class, 		"FriendlyLighting", 	4, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityFailuresaurus.class, 	"Failuresaurus", 		5, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityBones.class, 			"Bones", 				6, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityDinoEgg.class, 			"DinoEgg", 				8, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, "FriendlyPigZombie", 	12, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityPigBoss.class, 			"PigBoss", 				13, this, 250, 5, true);
-        //EntityRegistry.registerModEntity(EntityPregnantSheep.class, 	"PregnantSheep", 		19, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityStoneboard.class, 			"StoneBoard", 			1, this, 250, Integer.MAX_VALUE, false);
+        EntityRegistry.registerModEntity(EntityJavelin.class, 				"Javelin", 				2, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityAncientJavelin.class, 		"AncientJavelin", 		3, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityMLighting.class, 			"FriendlyLighting", 	4, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityFailuresaurus.class, 		"Failuresaurus", 		5, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityBones.class, 				"Bones", 				6, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityDinoEgg.class, 				"DinoEgg", 				8, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityFriendlyPigZombie.class, 	"FriendlyPigZombie", 	12, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityPigBoss.class, 				"PigBoss", 				13, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantSheep.class, 		"PregnantSheep", 		19, this, 250, 5, true);
         //EntityRegistry.registerModEntity(EntityPregnantCow.class, 		"PregnantCow", 			20, this, 250, 5, true);
         //EntityRegistry.registerModEntity(EntityPregnantPig.class, 		"PregnantPig", 			21, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntitySmilodon.class, 			"Smilodon", 			22, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityMammoth.class, 			"Mammoth", 				24, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityDodo.class,           	"Dodo",             	25, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityDodoEgg.class,           "DodoEgg",              26, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, "CultivatedDodoEgg",    27, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityCoelacanth.class, 		"Coelacanth",    		28, this, 250, 5, true);
-        //EntityRegistry.registerModEntity(EntityPregnantHorse.class, 	"PregnantHorse", 		29, this, 250, 5, true);
-        EntityRegistry.registerModEntity(EntityQuagga.class, 			"Quagga", 				30, this, 250, 3, true);
+        EntityRegistry.registerModEntity(EntitySmilodon.class, 				"Smilodon", 			22, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityMammoth.class, 				"Mammoth", 				24, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityDodo.class,           		"Dodo",             	25, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityDodoEgg.class,           	"DodoEgg",              26, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityCultivatedDodoEgg.class, 	"CultivatedDodoEgg",    27, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityCoelacanth.class, 			"Coelacanth",    		28, this, 250, 5, true);
+        //EntityRegistry.registerModEntity(EntityPregnantHorse.class, 		"PregnantHorse", 		29, this, 250, 5, true);
+        EntityRegistry.registerModEntity(EntityQuagga.class, 				"Quagga", 				30, this, 250, 3, true);
+        EntityRegistry.registerModEntity(EntityTerrorBird.class, 			"TerrorBird", 			31, this, 250, 3, true);
+        EntityRegistry.registerModEntity(EntityTerrorBirdEgg.class,         "TerrorBirdEgg",        32, this, 250, 5, true);
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {

@@ -290,7 +290,10 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                 		|| (var2 == Item.chickenRaw.itemID) 
                 		|| (var2 == Block.cloth.blockID) 
                 		|| (var2 == Fossil.icedMeat.itemID)
-                		|| (var2 == Item.leather.itemID) )
+                		|| (var2 == Item.leather.itemID)
+                		|| (var2 == Fossil.dodoWing.itemID)
+                		|| (var2 == Fossil.terrorBirdMeat.itemID)
+                		|| (var2 == Fossil.quaggaMeat.itemID))
                 {
                     this.RawIndex = var1;
                     break;
@@ -321,33 +324,33 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
     {
         if (this.canSmelt())
         {
-            ItemStack var1 = null;
-            int var2 = (new Random()).nextInt(100);
+            ItemStack itemstack = null;
+            int rand = (new Random()).nextInt(100);
             int var3;
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.biofossil)
             {
-                if (var2 < 1)
+                if (rand < 1)
                 {
-                    var1 = new ItemStack(Fossil.brokenSapling, 1);
+                    itemstack = new ItemStack(Fossil.brokenSapling, 1);
                 }
 
-                if (var2 > 1 && var2 <= 45)
+                if (rand > 1 && rand <= 45)
                 {
-                    var1 = new ItemStack(Item.dyePowder, 3, 15);
+                    itemstack = new ItemStack(Item.dyePowder, 3, 15);
                 }
 
-                if (var2 > 45 && var2 <= 80)
+                if (rand > 45 && rand <= 80)
                 {
-                    var1 = new ItemStack(Block.sand, 3);
+                    itemstack = new ItemStack(Block.sand, 3);
                 }
 
-                if (var2 > 85 && var2 <= 85)
+                if (rand > 85 && rand <= 85)
                 {
-                    var1 = new ItemStack(Fossil.fernSeed, 3);
+                    itemstack = new ItemStack(Fossil.fernSeed, 3);
                 }
 
-                if (var2 > 90	)
+                if (rand > 90	)
                 {
                     int i = (new Random()).nextInt(EnumDinoType.values().length + 2); //+1 for the sapling, +2 for coelacanth
                     Item i0 = null;
@@ -365,7 +368,7 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
                         i0 = EnumDinoType.values()[i - 2].DNAItem;
                     }
 
-                    var1 = new ItemStack(i0, 1);
+                    itemstack = new ItemStack(i0, 1);
                 }
             }
 
@@ -373,11 +376,11 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             {
                 if ((new Random()).nextInt(50) <= 30)
                 {
-                    var1 = new ItemStack(Item.silk, 4);
+                    itemstack = new ItemStack(Item.silk, 4);
                 }
                 else
                 {
-                    var1 = new ItemStack(Fossil.dnaSheep, 1);
+                    itemstack = new ItemStack(Fossil.dnaSheep, 1);
                 }
             }
 
@@ -387,155 +390,175 @@ public class TileEntityAnalyzer extends TileEntity implements IInventory, ISided
             }*/
             if (EnumDinoType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()) != null)
             {
-                var1 = new ItemStack(EnumDinoType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()), 1);
+                itemstack = new ItemStack(EnumDinoType.getDNA(this.analyzerItemStacks[this.RawIndex].getItem()), 1);
             }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.porkRaw)
             {
-                var1 = new ItemStack(Fossil.dnaPig, 2);
+                itemstack = new ItemStack(Fossil.dnaPig, 2);
             }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.beefRaw)
             {
-                var1 = new ItemStack(Fossil.dnaCow, 2);
+                itemstack = new ItemStack(Fossil.dnaCow, 2);
             }
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.leather)
             {
             	if(new Random().nextInt(10) > 3)
-                var1 = new ItemStack(Fossil.dnaCow, 1);
+                itemstack = new ItemStack(Fossil.dnaCow, 1);
             	else
-            	var1 = new ItemStack(Fossil.dnaHorse, 1);
+            	itemstack = new ItemStack(Fossil.dnaHorse, 1);
             }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.egg)
             {
-                var1 = new ItemStack(Fossil.dnaChicken, 1);
+                itemstack = new ItemStack(Fossil.dnaChicken, 1);
             }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Item.chickenRaw)
             {
-                var1 = new ItemStack(Fossil.dnaChicken, 1);
+                itemstack = new ItemStack(Fossil.dnaChicken, 1);
             }
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoWing)
             {
-                var1 = new ItemStack(Fossil.dnaDodo, 1);
+                itemstack = new ItemStack(Fossil.dnaDodo, 1);
             }
             
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoEgg)
             {
-                var1 = new ItemStack(Fossil.dnaDodo, 1);
+                itemstack = new ItemStack(Fossil.dnaDodo, 1);
             }
             
-            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.dodoEgg)
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.cultivatedDodoEgg)
             {
-                var1 = new ItemStack(Fossil.dnaDodo, 1);
+                itemstack = new ItemStack(Fossil.dnaDodo, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.terrorBirdMeat)
+            {
+            	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.quaggaMeat)
+            {
+            	itemstack = new ItemStack(Fossil.dnaQuagga, 1);
+            }
+            
+            if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.cultivatedTerrorBirdEgg)
+            {
+            	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
             }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.icedMeat)
             {
-                if (var2 < 10)
+                if (rand < 10)
                 {
-                    var1 = new ItemStack(Fossil.dnaSmilodon, 1);
+                    itemstack = new ItemStack(Fossil.dnaSmilodon, 1);
                 }
 
-                if (var2 >= 10 && var2 < 20)
+                if (rand >= 10 && rand < 20)
                 {
-                    var1 = new ItemStack(Fossil.dnaMammoth, 1);
+                    itemstack = new ItemStack(Fossil.dnaMammoth, 1);
                 }
 
-                if (var2 >= 20 && var2 < 30)
+                if (rand >= 20 && rand < 30)
                 {
-                    var1 = new ItemStack(Fossil.dnaDodo, 1);
+                    itemstack = new ItemStack(Fossil.dnaDodo, 1);
                 }
 
-                if (var2 >= 30 && var2 < 40)
+                if (rand >= 30 && rand < 40)
                 {
-                    var1 = new ItemStack(Item.chickenRaw, 1);
+                    itemstack = new ItemStack(Item.chickenRaw, 1);
                 }
 
-                if (var2 >= 40 && var2 < 50)
+                if (rand >= 40 && rand < 50)
                 {
-                    var1 = new ItemStack(Item.chickenRaw, 1);
+                    itemstack = new ItemStack(Item.chickenRaw, 1);
                 }
 
-                if (var2 >= 50 && var2 < 60)
+                if (rand >= 50 && rand < 60)
                 {
-                    var1 = new ItemStack(Item.porkRaw, 1);
+                    itemstack = new ItemStack(Item.porkRaw, 1);
                 }
                 
-                if (var2 >= 60 && var2 < 70)
+                if (rand >= 60 && rand < 70)
                 {
-                    var1 = new ItemStack(Fossil.dnaQuagga, 1);
+                    itemstack = new ItemStack(Fossil.dnaQuagga, 1);
+                }
+                
+                if (rand >= 70 && rand < 80)
+                {
+                	itemstack = new ItemStack(Fossil.dnaTerrorBird, 1);
                 }
 
-                if (var1 == null)
+                if (itemstack == null)
                 {
-                    var1 = new ItemStack(Item.beefRaw);
+                    itemstack = new ItemStack(Item.beefRaw);
                 }
             }
 
             if (this.analyzerItemStacks[this.RawIndex].getItem() == Fossil.relic)
             {
-                if (var2 <= 40)
+                if (rand <= 40)
                 {
-                    var1 = new ItemStack(Block.gravel, 2);
+                    itemstack = new ItemStack(Block.gravel, 2);
                 }
 
-                if (var2 > 40 && var2 <= 70)
+                if (rand > 40 && rand <= 70)
                 {
-                    var1 = new ItemStack(Fossil.stoneboard, 1);
+                    itemstack = new ItemStack(Fossil.stoneboard, 1);
                 }
 
-                if (var2 > 70 && var2 <= 88)
+                if (rand > 70 && rand <= 88)
                 {
-                    var1 = new ItemStack(Item.flint, 2);
+                    itemstack = new ItemStack(Item.flint, 2);
                 }
                 
-                if (var2 > 88 && var2 <= 92)
+                if (rand > 88 && rand <= 92)
                 {
-                    var1 = new ItemStack(Fossil.potteryShards, 1);
+                    itemstack = new ItemStack(Fossil.potteryShards, 1);
                 }
                 
-                if (var2 > 92 && var2 <= 96)
+                if (rand > 92 && rand <= 96)
                 {
                 	if (new Random().nextFloat() < 0.7)
-                	var1 = new ItemStack(Fossil.figurineBlock, 1, new Random().nextInt(5)+10);
+                	itemstack = new ItemStack(Fossil.figurineBlock, 1, new Random().nextInt(5)+10);
                 	else
-                	var1 = new ItemStack(Fossil.figurineBlock, 1, new Random().nextInt(5)+5);
+                	itemstack = new ItemStack(Fossil.figurineBlock, 1, new Random().nextInt(5)+5);
                 }
 
-                if (var2 > 96)
+                if (rand > 96)
                 {
-                    var1 = new ItemStack(Fossil.brokenSword, 1);
+                    itemstack = new ItemStack(Fossil.brokenSword, 1);
                 }
             }
 
-            if (var1 != null)
+            if (itemstack != null)
             {
-                if (var1.itemID == Item.dyePowder.itemID || var1.itemID == Fossil.fernSeed.itemID || var1.itemID == Fossil.stoneboard.itemID || var1.itemID == Item.flint.itemID || var1.itemID == Block.gravel.blockID || var1.itemID == Fossil.relic.itemID || var1.itemID == Fossil.brokenSapling.itemID || var1.itemID == Block.sand.blockID  || (var2 == Item.silk.itemID) || (var2 == Item.beefRaw.itemID))
+                if (itemstack.itemID == Item.dyePowder.itemID || itemstack.itemID == Fossil.fernSeed.itemID || itemstack.itemID == Fossil.stoneboard.itemID || itemstack.itemID == Item.flint.itemID || itemstack.itemID == Block.gravel.blockID || itemstack.itemID == Fossil.relic.itemID || itemstack.itemID == Fossil.brokenSapling.itemID || itemstack.itemID == Block.sand.blockID  || (rand == Item.silk.itemID) || (rand == Item.beefRaw.itemID))
                 {
                     for (var3 = 12; var3 > 8; --var3)
                     {
-                        if (this.analyzerItemStacks[var3] != null && var1.itemID == this.analyzerItemStacks[var3].itemID)
+                        if (this.analyzerItemStacks[var3] != null && itemstack.itemID == this.analyzerItemStacks[var3].itemID)
                         {
-                            if (this.analyzerItemStacks[var3].stackSize + var1.stackSize <= this.analyzerItemStacks[var3].getMaxStackSize())
+                            if (this.analyzerItemStacks[var3].stackSize + itemstack.stackSize <= this.analyzerItemStacks[var3].getMaxStackSize())
                             {
-                                this.analyzerItemStacks[var3].stackSize += var1.stackSize;
-                                var1.stackSize = 0;
+                                this.analyzerItemStacks[var3].stackSize += itemstack.stackSize;
+                                itemstack.stackSize = 0;
                                 break;
                             }
 
-                            var1.stackSize -= this.analyzerItemStacks[var3].getMaxStackSize() - this.analyzerItemStacks[var3].stackSize;
+                            itemstack.stackSize -= this.analyzerItemStacks[var3].getMaxStackSize() - this.analyzerItemStacks[var3].stackSize;
                             this.analyzerItemStacks[var3].stackSize = this.analyzerItemStacks[var3].getMaxStackSize();
                         }
                     }
                 }
 
-                if (var1.stackSize != 0 && this.analyzerItemStacks[this.SpaceIndex] == null)
+                if (itemstack.stackSize != 0 && this.analyzerItemStacks[this.SpaceIndex] == null)
                 {
-                    this.analyzerItemStacks[this.SpaceIndex] = var1.copy();
+                    this.analyzerItemStacks[this.SpaceIndex] = itemstack.copy();
                 }
 
                 --this.analyzerItemStacks[this.RawIndex].stackSize;
