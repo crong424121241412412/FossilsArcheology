@@ -13,11 +13,11 @@ public enum EnumDinoFoodMob
 	 * 
 	 * Overall boost values over EnumDinoFoodItem for fresh kills.
 	 */
-    Player(EntityPlayer.class, 30, 2),
-    Chicken(EntityChicken.class, 20, 2),
-    Cow(EntityCow.class, 50, 5),
-    Horse(EntityHorse.class, 50, 3),
-    Pig(EntityPig.class, 30, 3),
+    Player(EntityPlayer.class, 27, 2),
+    Chicken(EntityChicken.class, 5, 2),
+    Cow(EntityCow.class, 40, 5),
+    Horse(EntityHorse.class, 55, 3),
+    Pig(EntityPig.class, 20, 3),
     Sheep(EntitySheep.class, 35, 3),
     Squid(EntitySquid.class, 30, 3),
     Mob(EntityMob.class, 20, 1),
@@ -41,7 +41,8 @@ public enum EnumDinoFoodMob
     Dodo(EntityDodo.class, 20, 2),
     Coelacanth(EntityCoelacanth.class, 20, 2),
     Quagga(EntityQuagga.class, 50, 3),
-    Gastornis(EntityGastornis.class, 60, 3)
+    TerrorBird(EntityTerrorBird.class, 40, 3),
+    Mammoth(EntityMammoth.class,100, 7)
     ;
     public Class preyClass;
     public int FoodValue;
@@ -80,5 +81,6 @@ public enum EnumDinoFoodMob
         Ankylosaurus.setDetails(EntityAnkylosaurus.class);
         Pachycephalosaurus.setDetails(EntityPachycephalosaurus.class);
         Deinonychus.setDetails(EntityDeinonychus.class);
+        Gallimimus.setDetails(EntityGallimimus.class);
     }
 }

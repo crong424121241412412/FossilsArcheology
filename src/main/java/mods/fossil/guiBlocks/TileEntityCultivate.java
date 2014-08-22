@@ -2,7 +2,9 @@ package mods.fossil.guiBlocks;
 
 import mods.fossil.Fossil;
 import mods.fossil.client.LocalizationStrings;
+import mods.fossil.entity.mob.EntityTerrorBird;
 import mods.fossil.fossilEnums.EnumDinoType;
+import mods.fossil.items.ItemLivingCoelacanth;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -318,58 +320,58 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         }
     }
 
-    private static int getItemBurnTime(ItemStack var1)
+    private static int getItemBurnTime(ItemStack itemstack)
     {
-        if (var1 != null)
+        if (itemstack != null)
         {
-            int var2 = var1.getItem().itemID;
+            int output = itemstack.getItem().itemID;
 
-            if (var2 == Fossil.biofossil.itemID)
+            if (output == Fossil.biofossil.itemID)
             {
                 return 300;
             }
 
-            if (var2 == Item.porkRaw.itemID)
+            if (output == Item.porkRaw.itemID)
             {
                 return 3000;
             }
 
-            if (var2 == Item.fishRaw.itemID)
+            if (output == Item.fishRaw.itemID)
             {
                 return 3000;
             }
 
-            if (var2 == Item.beefRaw.itemID)
+            if (output == Item.beefRaw.itemID)
             {
                 return 4000;
             }
 
-            if (var2 == Item.chickenRaw.itemID)
+            if (output == Item.chickenRaw.itemID)
             {
                 return 1500;
             }
 
-            if (var2 == Item.egg.itemID)
+            if (output == Item.egg.itemID)
             {
                 return 1000;
             }
             
-            if (var2 == Fossil.dodoEgg.itemID)
+            if (output == Fossil.dodoEggID || output == Fossil.terrorBirdEggID)
             {
                 return 1000;
             }
             
-            if (var2 == Fossil.dodoWing.itemID)
+            if (output == Fossil.dodoWingID || output == Fossil.terrorBirdMeatID)
             {
                 return 1500;
             }
 
-            if (var2 == Item.slimeBall.itemID)
+            if (output == Item.slimeBall.itemID)
             {
                 return 800;
             }
 
-            if (var2 == Item.bucketMilk.itemID)
+            if (output == Item.bucketMilk.itemID)
             {
                 return 6000;
             }
@@ -391,65 +393,70 @@ public class TileEntityCultivate extends TileEntity implements IInventory, ISide
         return null;
     }
 
-    private ItemStack CheckSmelt(ItemStack var1)
+    private ItemStack CheckSmelt(ItemStack itemstack)
     {
-        if (var1.itemID == Fossil.brokenSapling.itemID)
+        if (itemstack.itemID == Fossil.brokenSapling.itemID)
         {
             return new ItemStack(Fossil.palmSap, 1);
         }
 
-        if (var1.itemID == Fossil.dnaSheep.itemID)
+        if (itemstack.itemID == Fossil.dnaSheep.itemID)
         {
             return new ItemStack(Fossil.embryoSheep, 1);
         }
 
-        if (var1.itemID == Fossil.dnaCow.itemID)
+        if (itemstack.itemID == Fossil.dnaCow.itemID)
         {
             return new ItemStack(Fossil.embryoCow, 1);
         }
 
-        if (var1.itemID == Fossil.dnaHorse.itemID)
+        if (itemstack.itemID == Fossil.dnaHorse.itemID)
         {
             return new ItemStack(Fossil.embryoHorse, 1);
         }
         
-        if (var1.itemID == Fossil.dnaQuagga.itemID)
+        if (itemstack.itemID == Fossil.dnaQuagga.itemID)
         {
             return new ItemStack(Fossil.embryoQuagga, 1);
         }
         
-        if (var1.itemID == Fossil.dnaChicken.itemID)
+        if (itemstack.itemID == Fossil.dnaChicken.itemID)
         {
             return new ItemStack(Fossil.embryoChicken, 1);
         }
 
-        if (var1.itemID == Fossil.dnaPig.itemID)
+        if (itemstack.itemID == Fossil.dnaPig.itemID)
         {
             return new ItemStack(Fossil.embryoPig, 1);
         }
 
-        if (var1.itemID == Fossil.dnaSmilodon.itemID)
+        if (itemstack.itemID == Fossil.dnaSmilodon.itemID)
         {
             return new ItemStack(Fossil.embryoSmilodon, 1);
         }
 
-        if (var1.itemID == Fossil.dnaMammoth.itemID)
+        if (itemstack.itemID == Fossil.dnaMammoth.itemID)
         {
             return new ItemStack(Fossil.embryoMammoth, 1);
         }
 
-        if (var1.itemID == Fossil.dnaDodo.itemID)
+        if (itemstack.itemID == Fossil.dnaDodo.itemID)
         {
             return new ItemStack(Fossil.cultivatedDodoEgg, 1);
         }
-
-        if (EnumDinoType.getEgg(var1.getItem()) != null)
+        
+        if (itemstack.getItem() == Fossil.dnaTerrorBird)
         {
-            return new ItemStack(EnumDinoType.getEgg(var1.getItem()), 1);    //converts dino dna to dino egg
+            return new ItemStack(Fossil.cultivatedTerrorBirdEgg, 1, new Random().nextInt(EntityTerrorBird.names.length));
+        }
+
+        if (EnumDinoType.getEgg(itemstack.getItem()) != null)
+        {
+            return new ItemStack(EnumDinoType.getEgg(itemstack.getItem()), 1);    //converts dino dna to dino egg
         }
         
-        if (var1.itemID == Fossil.dnaCoelacanth.itemID){
-        	return new ItemStack(Fossil.livingCoelacanth, 1);
+        if (itemstack.itemID == Fossil.dnaCoelacanth.itemID){
+        	return new ItemStack(Fossil.livingCoelacanth, 1, new Random().nextInt(ItemLivingCoelacanth.names.length));
         }
 
         return null;

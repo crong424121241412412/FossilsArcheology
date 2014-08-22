@@ -1,5 +1,10 @@
 package mods.fossil.fossilAI;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Logger;
+
 import mods.fossil.Fossil;
 import mods.fossil.entity.mob.EntityDinosaur;
 import mods.fossil.guiBlocks.TileEntityFeeder;
@@ -9,18 +14,14 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.pathfinding.PathEntity;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class WaterDinoAIEat extends EntityAIBase
 {
@@ -71,6 +72,12 @@ public class WaterDinoAIEat extends EntityAIBase
 
 	private double speed;
 
+	private int entityPosX;
+
+	private int entityPosY;
+
+	private int entityPosZ;
+
     /**
      * Creates The AI, Input: Dino, Speed, searching range
      */
@@ -78,9 +85,9 @@ public class WaterDinoAIEat extends EntityAIBase
     {
     	this.theWorld = Dino0.worldObj;
         this.targetMob = null;
-        this.targetFeeder = null;
-        this.speed = speed;
+        this.targetFeeder = null;	
         this.dinosaur = Dino0;
+        this.speed = speed;
         this.setMutexBits(1);
         this.SEARCH_RANGE = Range0;
         this.targetSorter = new DinoAINearestAttackableTargetSorter(this, this.dinosaur);
@@ -106,52 +113,70 @@ public class WaterDinoAIEat extends EntityAIBase
         {
 	        if (!Fossil.FossilOptions.Dinos_Starve)
 	        	return false;
-        }
+        }  
         
         if (!this.dinosaur.IsHungry() && !this.dinosaur.IsDeadlyHungry())
         {
             this.typeofTarget = NO_TARGET;
             return false;
         }
-        
-	        //targetFeeder = this.dinosaur.GetNearestFeeder(Range);
-	        //Feeder has priority over other food sources.
-	        if (this.dinosaur.SelfType.useFeeder() && (this.targetFeeder != null))
-	        {      	
-	            this.destX = this.targetFeeder.xCoord;
-	            this.destY = this.targetFeeder.yCoord;
-	            this.destZ = this.targetFeeder.zCoord;
-	            this.typeofTarget = FEEDER;
-	            return targetFeeder != null;
-	        }
-	        //After Feeder, check if there are items, THEN blocks on the ground to eat.
-	        else if (!this.dinosaur.SelfType.FoodItemList.IsEmpty() || !this.dinosaur.SelfType.FoodBlockList.IsEmpty())
-	        {
-	
-	            this.targetItem = this.getNearestItem2(SEARCH_RANGE);
-	            if( this.targetItem != null) {
-	                this.destX = targetItem.posX;
-	                this.destY = targetItem.posY;
-	                this.destZ = targetItem.posZ;
-	            	this.typeofTarget = ITEM;
-	            	return true;
-	            }
-	            
-	            if(!this.dinosaur.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
-	            {
-	                Vec3 targetBlock = this.dinosaur.getBlockToEat(SEARCH_RANGE/2);
-	                
-	                if (targetBlock != null)//Found Item, go there and eat it
-	                {
-	                    this.destX = targetBlock.xCoord;
-	                    this.destY = targetBlock.yCoord;
-	                    this.destZ = targetBlock.zCoord;
-	                    this.typeofTarget=BLOCK;
-	                    //System.out.println("BLOCK FOUND!");
-	                    return true;
-	                }
-	            }
-	        }
+
+    	PathNavigate pathnavigate = this.dinosaur.getNavigator();
+        PathEntity pathentity = pathnavigate.getPath();
+
+        if (pathentity != null && !pathentity.isFinished())
+        {
+                PathPoint pathpoint = pathentity.getFinalPathPoint();
+                this.entityPosX = pathpoint.xCoord;
+                this.entityPosY = pathpoint.yCoord + 1;
+                this.entityPosZ = pathpoint.zCoord;
+
+            if (this.dinosaur.getDistanceSq((double)this.entityPosX, this.dinosaur.posY, (double)this.entityPosZ) <= 5.25D)
+            {
+		        //Feeder has priority over other food sources.
+		        if (this.dinosaur.SelfType.useFeeder())
+		        {
+		        	//targetFeeder = this.dinosaur.GetNearestFeeder(Range/2);
+		        	this.targetFeeder = null;
+		        	
+		            if(this.targetFeeder != null)
+		            {
+		            	Fossil.Console("Found Feeder at: "+ this.targetFeeder.xCoord + ", "+ this.targetFeeder.yCoord + ", "+ this.targetFeeder.zCoord);
+		            this.destX = this.targetFeeder.xCoord;
+		            this.destY = this.targetFeeder.yCoord;
+		            this.destZ = this.targetFeeder.zCoord;
+		            this.typeofTarget = FEEDER;
+		            return true;
+		            }
+		        }
+         	}
+        }
+        //Check for items and then blocks.
+        if (!this.dinosaur.SelfType.FoodItemList.IsEmpty())
+        {
+            this.targetItem = this.getNearestItem2(this.SEARCH_RANGE);
+            if( this.targetItem != null) {
+                this.destX = targetItem.posX;
+                this.destY = targetItem.posY;
+                this.destZ = targetItem.posZ;
+            	this.typeofTarget = ITEM;
+            	return true;
+            }
+    
+            if(!this.dinosaur.SelfType.FoodBlockList.IsEmpty())//Hasn't found anything and has blocks it can look for
+            {
+                Vec3 targetBlock = this.dinosaur.getBlockToEat(this.SEARCH_RANGE);
+                
+                if (targetBlock != null)//Found Item, go there and eat it
+                {
+                    this.destX = targetBlock.xCoord;
+                    this.destY = targetBlock.yCoord;
+                    this.destZ = targetBlock.zCoord;
+                    this.typeofTarget=BLOCK;
+                    return true;
+                }
+            }
+		}
         return false;
     }
 
@@ -161,29 +186,35 @@ public class WaterDinoAIEat extends EntityAIBase
     @Override
     public boolean continueExecuting()
     {
-    	
-    	if( !this.dinosaur.IsHungry() || !this.dinosaur.IsDeadlyHungry()){
+        double Distance = Math.sqrt(Math.pow(this.dinosaur.posX - this.destX, 2.0D) + Math.pow(this.dinosaur.posZ - this.destZ, 2.0D));
+
+    	if( !this.dinosaur.IsHungry())
+    	{
     		return false;
     	}
-    	else
-    	{
-    		switch(this.typeofTarget) {
-	    		case NO_TARGET:
-	    			break;
-	    		case ITEM:
-	    			return targetItem.isEntityAlive();
-	    		case BLOCK:
-	    			return this.dinosaur.SelfType.FoodBlockList.CheckBlockById(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ));
-	    		case MOB:
-	    			return targetMob != null;
-	    		case FEEDER:
-	    			return targetFeeder.isInvalid();
-	    			//return targetFeeder != null;
+        
+        if (Distance > this.SEARCH_RANGE)
+        {
+        	Fossil.Console("Target too far, discontinuing task. Distance: "+Distance +", Range: "+this.SEARCH_RANGE);
+        	return false;
+        }
+
+		switch(this.typeofTarget) {
+    		case NO_TARGET:
 	    		default:
-	    			break;
-    		}	
-    	}
-    	return false;
+	    			return false;
+    		case ITEM:
+    			return this.targetItem.isEntityAlive() && this.targetItem != null;
+    		case BLOCK:
+    			return this.dinosaur.SelfType.FoodBlockList.CheckBlockById(this.dinosaur.worldObj.getBlockId((int)destX, (int)destY, (int)destZ)) && this.targetBlock != null;
+    		case MOB:
+    			return this.targetMob != null && this.targetMob.isEntityAlive();
+    		case FEEDER:
+    			return !this.targetFeeder.isInvalid();
+    			//return targetFeeder != null;
+
+		}	
+    	
         //return ((this.dinosaur.IsHungry() || this.dinosaur.IsDeadlyHungry()) && (this.typeofTarget != -1));
     }
 
@@ -212,17 +243,16 @@ public class WaterDinoAIEat extends EntityAIBase
         	if(Distance < SEARCH_RANGE) {
         		
         		this.moveToTarget(this.destX, this.destY, this.destZ);
-        		this.TimeAtThisTarget++;
-        		
+                this.TimeAtThisTarget++;
         		if (Distance < 4.5D){
         			if (this.targetFeeder != null) {
 		                int healval = MathHelper.floor_double(this.targetFeeder.Feed(this.dinosaur, this.dinosaur.SelfType) / 15D);
 		                this.dinosaur.heal(healval);
+		                }
         			}
         		}
-                if (this.TimeAtThisTarget == 100){
-                    endTask();
-                }
+            if (this.TimeAtThisTarget == 100){
+                endTask();
         	}
         	else {
         		endTask();
@@ -338,7 +368,7 @@ public class WaterDinoAIEat extends EntityAIBase
             if ((this.dinosaur.SelfType.FoodItemList.CheckItemById(entityItem1.getEntityItem().itemID) 
             		|| this.dinosaur.SelfType.FoodBlockList.CheckBlockById(entityItem1.getEntityItem().itemID))
             		&& this.dinosaur.getDistanceSqToEntity(entityItem1) < SEARCH_RANGE)
-            {        
+            {
             	entityItem = entityItem1; 
             	//SEARCH_RANGE = (int) this.dinosaur.getDistanceSqToEntity(entityItem);
             }
@@ -350,18 +380,18 @@ public class WaterDinoAIEat extends EntityAIBase
     {
     	double distance = 64.0D;
 
-            // Simple "pathfinding" to attack closest player.
-            this.deltaX = this.destX - this.dinosaur.posX;
-            this.deltaY = this.destY - this.dinosaur.posY;
-            this.deltaZ = this.destZ - this.dinosaur.posZ;
-            //rotate entity to face target
-            this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
- 
-            this.movePosX = this.deltaX;
-            this.movePosY = this.deltaY;
-            this.movePosZ = this.deltaZ;
-            
-            this.dinosaur.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
+        // Simple "pathfinding" to attack closest player.
+        this.deltaX = this.destX - this.dinosaur.posX;
+        this.deltaY = this.destY - this.dinosaur.posY;
+        this.deltaZ = this.destZ - this.dinosaur.posZ;
+        //rotate entity to face target
+        this.dinosaur.renderYawOffset = this.dinosaur.rotationYaw = -((float)Math.atan2(deltaX, deltaZ)) * 180.0F / (float)Math.PI;
+
+        this.movePosX = this.deltaX;
+        this.movePosY = this.deltaY;
+        this.movePosZ = this.deltaZ;
+        
+        this.dinosaur.addVelocity( deltaX * this.speed, deltaY * this.speed,  deltaZ * this.speed);
     }
 
 }

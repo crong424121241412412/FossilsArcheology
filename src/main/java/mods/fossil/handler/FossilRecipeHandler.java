@@ -22,10 +22,8 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ItemStack(Fossil.blockSifterIdle, 1), new Object[] {"XYX", "YZY", "YXY", 'X', Item.silk, 'Y', Block.planks, 'Z', Block.fenceIron});
         GameRegistry.addRecipe(new ItemStack(Fossil.ancientWoodPlate, 3), new Object[] {"XX", 'X', Fossil.ancientWood});
 
-        for (int i = 0; i < EnumDinoType.values().length; i++)
-        GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', EnumDinoType.values()[i].EggItem});
-        GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', Fossil.dodoEgg});
-        GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', Fossil.cultivatedDodoEgg});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.cake, 1), new Object[] {"MMM", "SES", "WWW", 'M', Item.bucketMilk, 'S', Item.sugar, 'W', Item.wheat, 'E', "foodEgg"}));
+
         GameRegistry.addRecipe(new ItemStack(Fossil.skullStick, 1), new Object[] {"X", "Y", 'X', Fossil.blockSkull, 'Y', Item.stick});
         GameRegistry.addRecipe(new ItemStack(Fossil.drum, 1), new Object[] {"ZZZ", "XYX", "XXX", 'X', Block.planks, 'Y', Item.redstone, 'Z', Item.leather});
         GameRegistry.addRecipe(new ItemStack(Fossil.feederActive, 1), new Object[] {"XYX", "ZAB", "BBB", 'X', Item.ingotIron, 'Y', Block.glass, 'Z', Block.stoneButton, 'A', Item.bucketEmpty, 'B', Block.stone});
@@ -90,7 +88,7 @@ public class FossilRecipeHandler
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.feet, 1), new Object[] {"* *", "# #", '#', new ItemStack(Fossil.foot,1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.feet, 1), new Object[] {"   ", "* *", "# #", '#', new ItemStack(Fossil.foot,1, OreDictionary.WILDCARD_VALUE), '*', "dinosaurClaw"}));
         GameRegistry.addRecipe(new ItemStack(Fossil.femurs, 1), new Object[] {"###", "* *", "# #", '#', Item.bone, '*', new ItemStack(Fossil.legBone,1, OreDictionary.WILDCARD_VALUE)});
-        GameRegistry.addRecipe(new ItemStack(Fossil.ribCage, 1), new Object[] {"# #", " # ", "###", '#', Item.bone});
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Fossil.ribCage, 1), new Object[] {"B B", " R ", "BVB", 'B', Item.bone, 'R', "dinosaurRibCage", 'V', "dinosaurVertebrae"}));
         GameRegistry.addRecipe(new ItemStack(Fossil.skullHelmet, 1), new Object[] {"#X#", "# #", '#', Item.bone, 'X', new ItemStack(Fossil.skull,1, OreDictionary.WILDCARD_VALUE)});
         //Craft damaged vases
         GameRegistry.addRecipe(new ItemStack(Fossil.vaseVoluteBlock, 1), new Object[] {"X X", "X X", "XXX", 'X', Fossil.potteryShards});
@@ -123,5 +121,7 @@ public class FossilRecipeHandler
 
         GameRegistry.addSmelting(Fossil.icedMeat.itemID, new ItemStack(Item.beefCooked), 3.0F);
         GameRegistry.addSmelting(Fossil.dodoWing.itemID, new ItemStack(Fossil.dodoWingCooked), 3.0F);
+        GameRegistry.addSmelting(Fossil.terrorBirdMeat.itemID, new ItemStack(Fossil.terrorBirdMeatCooked), 3.0F);
+        GameRegistry.addSmelting(Fossil.quaggaMeat.itemID, new ItemStack(Fossil.quaggaMeatCooked), 3.0F);
     }
 }
