@@ -3,6 +3,7 @@ package mods.fossil.client;
 import mods.fossil.CommonProxy;
 import mods.fossil.Fossil;
 import mods.fossil.client.gui.GuiBoneHelmet;
+import mods.fossil.client.model.ModelAllosaurus;
 import mods.fossil.client.model.ModelAnkylosaurus;
 import mods.fossil.client.model.ModelBrachiosaurus;
 import mods.fossil.client.model.ModelCoelacanth;
@@ -27,6 +28,7 @@ import mods.fossil.client.model.ModelTRex;
 import mods.fossil.client.model.ModelTerrorBird;
 import mods.fossil.client.model.ModelTriceratops;
 import mods.fossil.client.model.ModelVelociraptor;
+import mods.fossil.client.renderer.entity.RenderAllosaurus;
 import mods.fossil.client.renderer.entity.RenderAnkylosaurus;
 import mods.fossil.client.renderer.entity.RenderBones;
 import mods.fossil.client.renderer.entity.RenderBrachiosaurus;
@@ -72,6 +74,7 @@ import mods.fossil.entity.EntityDodoEgg;
 import mods.fossil.entity.EntityJavelin;
 import mods.fossil.entity.EntityStoneboard;
 import mods.fossil.entity.EntityTerrorBirdEgg;
+import mods.fossil.entity.mob.EntityAllosaurus;
 import mods.fossil.entity.mob.EntityAnkylosaurus;
 import mods.fossil.entity.mob.EntityBones;
 import mods.fossil.entity.mob.EntityBrachiosaurus;
@@ -160,6 +163,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityQuagga.class, new RenderQuagga(new ModelQuagga(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBird.class, new RenderTerrorBird(new ModelTerrorBird(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityTerrorBirdEgg.class, new RenderSnowball(Fossil.terrorBirdEgg));
+        RenderingRegistry.registerEntityRenderingHandler(EntityAllosaurus.class, new RenderAllosaurus(new ModelAllosaurus(), 0.5F));
 
  
         RenderingRegistry.registerBlockHandler(Fossil.feederRenderID, new RenderFeeder());

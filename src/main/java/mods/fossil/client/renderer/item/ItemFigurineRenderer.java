@@ -1,19 +1,16 @@
 package mods.fossil.client.renderer.item;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import mods.fossil.blocks.BlockFigurine;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
 import mods.fossil.client.model.ModelFigurine;
 import mods.fossil.client.model.ModelFigurineBroken;
-import mods.fossil.guiBlocks.TileEntityFigurine;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-import static org.lwjgl.opengl.GL11.*;
+
+import org.lwjgl.opengl.GL11;
 
 public class ItemFigurineRenderer implements IItemRenderer
 {

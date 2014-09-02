@@ -39,9 +39,9 @@ public enum EnumDinoType
     Ankylosaurus(EntityAnkylosaurus.class,  			C.MODEL | C.TAME  	| C.RIDE  	| C.HERBIVORE),
     Pachycephalosaurus(EntityPachycephalosaurus.class, 	          C.TAME 				| C.HERBIVORE),
     Deinonychus(EntityDeinonychus.class,				C.MODEL | C.TAME  				| C.CARNIVORE),
-    Gallimimus(EntityGallimimus.class,						      C.TAME	| C.RIDE	| C.HERB_CARN),
+    Gallimimus(EntityGallimimus.class,					C.MODEL | C.TAME	| C.RIDE	| C.HERB_CARN),
     Liopleurodon(EntityLiopleurodon.class, 				C.MODEL |  		  				  C.CARNIVORE),
-    //Gastornis(EntityGastornis.class, 							  C.TAME	| C.RIDE	| C.CARNIVORE),
+    Allosaurus(EntityAllosaurus.class, 					C.MODEL | C.TAME	| C.RIDE	| C.CARNIVORE),
     ;
 
 
@@ -279,6 +279,23 @@ public enum EnumDinoType
      */
     public static void init()
     {
+    	
+        Allosaurus.setItems(Fossil.skullStick);
+        Allosaurus.setAges(5, 10, -1);
+        Allosaurus.setProperties(10.0D, 40.0D, 2.0D, 11.0D, 0.25D, 0.42D, 400);
+        Allosaurus.setExperience(1F, 1F);
+        //Blocks
+        //Items
+        EnumDinoFoodItem.carnivoreItemPreset(Allosaurus);
+        //Mobs
+        Allosaurus.FoodMobList.addMob(EnumDinoFoodMob.Sheep);
+        Allosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pig);
+        Allosaurus.FoodMobList.addMob(EnumDinoFoodMob.Cow);
+        Allosaurus.FoodMobList.addMob(EnumDinoFoodMob.Horse);
+        Allosaurus.FoodMobList.addMob(EnumDinoFoodMob.Pachycephalosaurus);
+        Allosaurus.FoodMobList.addMob(EnumDinoFoodMob.Stegosaurus);
+        Allosaurus.FoodMobList.addMob(EnumDinoFoodMob.Gallimimus);
+        
         Ankylosaurus.setItems(Item.stick);
         Ankylosaurus.setAges(5, 12, -1);
         Ankylosaurus.setProperties(25.0D, 70.0D, 2.0D, 9.0D, 0.25D, -1, 500);
@@ -515,6 +532,7 @@ public enum EnumDinoType
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Pig);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Cow);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Horse);
+        TRex.FoodMobList.addMob(EnumDinoFoodMob.Allosaurus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Dilophosaurus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Deinonychus);
         TRex.FoodMobList.addMob(EnumDinoFoodMob.Pachycephalosaurus);
@@ -536,16 +554,6 @@ public enum EnumDinoType
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Chicken);        
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Dodo);
         Velociraptor.FoodMobList.addMob(EnumDinoFoodMob.Pig);  
-
-        /*
-        TerrorBird.setItems(Item.arrow);
-        TerrorBird.setAges(4, 10, -1);
-        TerrorBird.setProperties(4.0D, 20.0D, 2.0D, 6.0D, 0.3D, 0.65D, 300);
-        TerrorBird.setExperience(0.2F, 0.2F);
-        TerrorBird.FoodItemList.addItem(EnumDinoFoodItem.BeefRaw);
-        TerrorBird.FoodMobList.addMob(EnumDinoFoodMob.Quagga);
-        TerrorBird.FoodMobList.addMob(EnumDinoFoodMob.Horse);
-        */
     }
 
     /**

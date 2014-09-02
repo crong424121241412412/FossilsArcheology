@@ -9,6 +9,10 @@ public class DinoSound
 
     public static String[] files =
     {
+        SOUND_RESOURCE_LOCATION + "allosaurus_death1.ogg",
+        SOUND_RESOURCE_LOCATION + "allosaurus_hurt1.ogg",
+        SOUND_RESOURCE_LOCATION + "allosaurus_living_tamed1.ogg",
+        SOUND_RESOURCE_LOCATION + "allosaurus_living_untamed1.ogg",
         SOUND_RESOURCE_LOCATION + "ankylosaurus_death.ogg",
         SOUND_RESOURCE_LOCATION + "ankylosaurus_hurt1.ogg",
         SOUND_RESOURCE_LOCATION + "ankylosaurus_hurt2.ogg",
@@ -84,6 +88,10 @@ public class DinoSound
         SOUND_RESOURCE_LOCATION + "stegosaurus_living1.ogg",
         SOUND_RESOURCE_LOCATION + "stegosaurus_living2.ogg",
         SOUND_RESOURCE_LOCATION + "stegosaurus_living3.ogg",
+        SOUND_RESOURCE_LOCATION + "terror_bird_hurt.ogg",        
+        SOUND_RESOURCE_LOCATION + "terror_bird_living.ogg",
+        SOUND_RESOURCE_LOCATION + "terror_bird_attack.ogg",
+        SOUND_RESOURCE_LOCATION + "terror_bird_death.ogg",      
         SOUND_RESOURCE_LOCATION + "triceratops_death.ogg",
         SOUND_RESOURCE_LOCATION + "triceratops_hurt.ogg",        
         SOUND_RESOURCE_LOCATION + "triceratops_living1.ogg",
@@ -134,7 +142,12 @@ public class DinoSound
     /*
      * ENTITIES
      */
-
+    //allosaurus
+    public static final String allosaurus_death = SOUND_PREFIX + "allosaurus_death1";
+    public static final String allosaurus_living_tamed = SOUND_PREFIX + "allosaurus_living_tamed1";
+    public static final String allosaurus_living_untamed = SOUND_PREFIX + "allosaurus_living_untamed1";
+    public static final String allosaurus_hurt = SOUND_PREFIX + "allosaurus_hurt1";
+    
     //ankylosaurus
     public static final String ankylosaurus_death = SOUND_PREFIX + "ankylosaurus_death";
     public static final String ankylosaurus_living = SOUND_PREFIX + "ankylosaurus_living";
@@ -224,6 +237,13 @@ public class DinoSound
     public static final String stegosaurus_living = SOUND_PREFIX + "stegosaurus_living";
     public static final String stegosaurus_hurt = SOUND_PREFIX + "stegosaurus_hurt";
 
+    //terror bird
+    
+    public static final String terror_bird_hurt = SOUND_PREFIX + "terror_bird_hurt.ogg";
+    public static final String terror_bird_living = SOUND_PREFIX + "terror_bird_living.ogg";
+    public static final String terror_bird_attack = SOUND_PREFIX + "terror_bird_attack.ogg";
+    public static final String terror_bird_death = SOUND_PREFIX + "terror_bird_death.ogg";
+    
     //triceratops
     public static final String triceratops_death = SOUND_PREFIX + "triceratops_death";
     public static final String triceratops_living = SOUND_PREFIX + "triceratops_living";

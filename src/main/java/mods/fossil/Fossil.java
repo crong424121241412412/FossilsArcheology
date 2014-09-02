@@ -202,7 +202,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.3.2a2";
+    public static final String modversion = "1.6.4 Build 6.4";
 
     /*
      * Set mod state here
@@ -841,7 +841,6 @@ public class Fossil
             //newDinoDNAID = config.getItem(Configuration.CATEGORY_ITEM, "newDinoDNA", 10075).getInt();
             //Animal DNA
             //animalDNAID = config.getItem(Configuration.CATEGORY_ITEM, "animalDNA", 10076).getInt();
-            dnaPigID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PIG_NAME, 10077).getInt();
             dnaSheepID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_SHEEP_NAME, 10078).getInt();
             dnaCowID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_COW_NAME, 10079).getInt();
             dnaChickenID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_CHICKEN_NAME, 10080).getInt();
@@ -852,7 +851,7 @@ public class Fossil
             livingCoelacanthID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.LIVING_COELACANTH_NAME, 10085).getInt();
             dnaHorseID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_HORSE_NAME, 10086).getInt();
             dnaQuaggaID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_QUAGGA_NAME, 10087).getInt();
-            //dnaWitherID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10087).getInt();
+            dnaPigID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DNA_PIG_NAME, 10088).getInt();
             //dnaSpiderID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10088).getInt();
             //dnaSkeletonID = config.getItem(Configuration.CATEGORY_ITEM, "dnaMammoth", 10089).getInt();
 
@@ -865,7 +864,6 @@ public class Fossil
 
             //Embryos
             //embyoSyringeID = config.getItem(Configuration.CATEGORY_ITEM, "embyoSyringe", 10107).getInt();
-            embryoPigID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_PIG_NAME, 10108).getInt();
             embryoSheepID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_SHEEP_NAME, 10109).getInt();
             embryoCowID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_COW_NAME, 10110).getInt();
             embryoChickenID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_CHICKEN_NAME, 10111).getInt();
@@ -873,7 +871,7 @@ public class Fossil
             embryoMammothID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_MAMMOTH_NAME, 10113).getInt();
             embryoHorseID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_HORSE_NAME, 10114).getInt();
             embryoQuaggaID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_QUAGGA_NAME, 10114).getInt();
-            //embryoGhastID = config.getItem(Configuration.CATEGORY_ITEM, "embryoGhast", 10116).getInt();
+            embryoPigID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.EMBRYO_PIG_NAME, 10115).getInt();
             //embryoWitherID = config.getItem(Configuration.CATEGORY_ITEM, "embryoWither", 10117).getInt();
             //embryoSkeletonID = config.getItem(Configuration.CATEGORY_ITEM, "embryoSkeleton", 10118).getInt();
             //embryoSpiderID = config.getItem(Configuration.CATEGORY_ITEM, "embryoSpider", 10119).getInt();
@@ -885,13 +883,14 @@ public class Fossil
             dodoWingID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_NAME, 10200).getInt();
             dodoWingCookedID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DODO_WING_COOKED_NAME, 10201).getInt();
 
+            cookedDinoMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt();
+
             //DINOSAUR IDS START AT 10125, GIVE PLENTY OF BUFFER ROOM
             for (int i = 0; i < EnumDinoType.values().length; i++)
             {
                 RAWIds[i] = config.getItem(Configuration.CATEGORY_ITEM, "raw" + EnumDinoType.values()[i].name(), 10125 + i).getInt();
             }
 
-            cookedDinoMeatID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINO_STEAK_NAME, 10124).getInt();
             figurineItemID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.ITEM_FIGURINE_NAME, 10200).getInt();
             potteryShardsID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.POTTERY_SHARDS, 10201).getInt();
             dinosaurModelsID = config.getItem(Configuration.CATEGORY_ITEM, LocalizationStrings.DINOSAUR_MODELS, 10202).getInt();
@@ -925,6 +924,8 @@ public class Fossil
             FossilOptions.TRexFeathers = config.get("toggle_feathers", "TRex Feathers", false).getBoolean(false);
             FossilOptions.DeinonychusFeathers = config.get("toggle_feathers", "Deinonychus Feathers", true).getBoolean(true);
             FossilOptions.GallimimusFeathers = config.get("toggle_feathers",  "Gallimimus Feathers", false).getBoolean(false);
+            FossilOptions.CompsognathusFeathers = config.get("toggle_feathers",  "Compsognathus Feathers", false).getBoolean(false);
+            FossilOptions.VelociraptorFeathers = config.get("toggle_feathers",  "Velociraptor Feathers", false).getBoolean(false);
             
             //Enchantment Toggle
             FossilOptions.AllowTableEnchantments = config.get("option", "Allow Table Enchantments", true).getBoolean(true);
@@ -1233,7 +1234,7 @@ public class Fossil
 
         for (int i = 0; i < EnumDinoType.values().length; i++)
         {
-            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 4, true);
+            EntityRegistry.registerModEntity(EnumDinoType.values()[i].getDinoClass(), EnumDinoType.values()[i].name(), 200 + i, this, 250, 3, true);
         }
         EntityRegistry.addSpawn(EntityCoelacanth.class, 1, 2, 4, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.ocean});
         EntityRegistry.addSpawn(EntityNautilus.class, 5, 4, 14, EnumCreatureType.waterCreature, new BiomeGenBase[] {BiomeGenBase.river, BiomeGenBase.ocean});

@@ -2,13 +2,14 @@ package mods.fossil.client.renderer.item;
 
 import mods.fossil.client.model.ModelSifter;
 import mods.fossil.guiBlocks.TileEntitySifter;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 public class ItemSifterRenderer implements IItemRenderer
 {
     private ModelSifter modelsifter;
+    TileEntitySpecialRenderer render;
 
     public ItemSifterRenderer()
     {
@@ -30,6 +31,6 @@ public class ItemSifterRenderer implements IItemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
-        TileEntityRenderer.instance.renderTileEntityAt(new TileEntitySifter(), 0.0D, 0.0D, 0.0D, 0.0F);
+    	this.render.renderTileEntityAt(new TileEntitySifter(), 0.0D, 0.0D, 0.0D, 0.0F);
     }
 }

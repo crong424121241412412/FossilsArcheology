@@ -20,7 +20,7 @@ public class ItemDinosaurBones extends Item {
 	public ItemDinosaurBones(int ID, String _itemType) {
 		super(ID);
 		this.itemType = _itemType;
-
+		this.setMaxDamage(0);
 		this.setCreativeTab(Fossil.tabFBones);
 		setHasSubtypes(true);
 	}
