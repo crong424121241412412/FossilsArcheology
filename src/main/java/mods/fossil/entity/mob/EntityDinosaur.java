@@ -189,7 +189,12 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
      */
     public boolean isTeen()
     {
-        return this.getDinoAge() >= this.SelfType.TeenAge;
+        return this.getDinoAge() >= this.SelfType.TeenAge && this.getDinoAge() < this.SelfType.AdultAge;
+    }
+    
+    public boolean isChild()
+    {
+		return this.getDinoAge() < this.SelfType.TeenAge;
     }
 
     /**
@@ -382,7 +387,7 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
 
     protected String getModelTexture()
     {
-        return Fossil.modid + ":" + "textures/mob/DinoModel" + this.SelfType.toString() + ".png";
+    	return Fossil.modid + ":" + "textures/mob/DinosaurModels/DinoModel" + this.SelfType.toString() + ".png";
     }
 
     /**
@@ -816,18 +821,13 @@ public abstract class EntityDinosaur extends EntityPrehistoric implements IEntit
                     PartnerCount = 20;
                 }
 
-                if ((new Random()).nextInt(60) < PartnerCount)
+                if ((new Random()).nextInt(100) < PartnerCount)
                 {
                     EntityDinoEgg var5 = null;
                     var5 = new EntityDinoEgg(this.worldObj, this.SelfType);
                     ((Entity)var5).setLocationAndAngles(this.posX + (double)((new Random()).nextInt(3) - 1), this.posY, this.posZ + (double)((new Random()).nextInt(3) - 1), this.worldObj.rand.nextFloat() * 360.0F, 0.0F);
 
-                    if(this.worldObj.isRemote){
-	                    if (this.worldObj.checkNoEntityCollision(var5.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var5, var5.boundingBox).size() == 0)
-	                    {
 	                    	this.worldObj.spawnEntityInWorld((Entity)var5);
-	                    }
-                    }
 
                     //this.showHeartsOrSmokeFX(true);
                     this.worldObj.setEntityState(this, HEART_MESSAGE);

@@ -218,7 +218,7 @@ public class EntitySmilodon extends EntityPrehistoric
      */
     protected boolean canDespawn()
     {
-        return this.isAngry();
+    	return false;
     }
 
     /**

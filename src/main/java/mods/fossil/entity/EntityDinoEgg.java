@@ -71,7 +71,7 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
     public String getTexture()
     {
         int var1 = this.DinoInside.ordinal();
-        return var1 < 4 ? "fossil:textures/mob/eggTexture" + (var1 + 1) + ".png" : "fossil:textures/mob/eggTexture" + var1 + ".png";
+        return var1 < 4 ? "fossil:textures/mob/DinosaurEggs/eggTexture" + (var1 + 1) + ".png" : "fossil:textures/mob/DinosaurEggs/eggTexture" + var1 + ".png";
     }
 
     public EntityDinoEgg(World var1)
@@ -501,9 +501,24 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
 
                 switch (this.DinoInside)
                 {
-                    case Triceratops:
-                        var5 = new EntityTriceratops(this.worldObj);
-                        break;
+	                case Triceratops:
+	                	var5 = new EntityTriceratops(this.worldObj);
+	                	
+	                    if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
+	                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DESERT))
+	                    {
+	                        ((EntityTriceratops)var5).setSubSpecies(1);
+	                    }
+	                    else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+	                    		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
+	                    {
+	                        ((EntityTriceratops)var5).setSubSpecies(2);
+	                    }
+	                    else 
+	                    {
+	                    	((EntityTriceratops)var5).setSubSpecies(0);
+	                    }
+	                    break;
 
                     case Velociraptor:
                         var5 = new EntityVelociraptor(this.worldObj);
@@ -574,11 +589,56 @@ public class EntityDinoEgg extends Entity implements IEntityAdditionalSpawnData
                         break;
 
                     case Stegosaurus:
-                        var5 = new EntityStegosaurus(this.worldObj);
+                    	var5 = new EntityStegosaurus(this.worldObj);
+                    	
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.BEACH)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DESERT))
+                        {
+                            ((EntityStegosaurus)var5).setSubSpecies(2);
+                        }
+                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FROZEN)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.MOUNTAIN))
+                        {
+                            ((EntityStegosaurus)var5).setSubSpecies(1);
+                        }
+                        else 
+                        {
+                        	((EntityStegosaurus)var5).setSubSpecies(0);
+                        }
                         break;
 
                     case Dilophosaurus:
                         var5 = new EntityDilophosaurus(this.worldObj);
+
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DESERT))
+                        {
+                            ((EntityDilophosaurus)var5).setSubSpecies(1);
+                        }
+                        else
+                        {
+                            ((EntityDilophosaurus)var5).setSubSpecies(0);
+                        }
+                        break;
+                        
+                    case Allosaurus:
+                        var5 = new EntityAllosaurus(this.worldObj);
+                        
+                        if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.DESERT)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.WASTELAND))
+                        {
+                            ((EntityAllosaurus)var5).setSubSpecies(2);
+                        }
+                        else if (BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.JUNGLE)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.SWAMP)
+                        		|| BiomeDictionary.isBiomeOfType(var3, BiomeDictionary.Type.FOREST))
+                        {
+                            ((EntityAllosaurus)var5).setSubSpecies(3);
+                        }
+                        else
+                        {
+                            ((EntityAllosaurus)var5).setSubSpecies(1);
+                        }
+                        
                         break;
 
                     case Brachiosaurus:

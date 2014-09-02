@@ -1,7 +1,7 @@
 package mods.fossil.client.renderer.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Calendar;
+
 import mods.fossil.client.model.ModelTNClock;
 import mods.fossil.guiBlocks.TileEntityTimeMachine;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -9,9 +9,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
-import java.util.Calendar;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderTNClock extends TileEntitySpecialRenderer
@@ -46,7 +48,7 @@ public class RenderTNClock extends TileEntitySpecialRenderer
         float var11 = var1.SendingCurrentFacing + var10 * var8;
         GL11.glRotatef(-var11 * 180.0F / (float)Math.PI, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        tileEntityRenderer.renderEngine.bindTexture(loc);
+        this.bindTexture(loc);
         float var12 = 0.0F;
         float var13 = 0.0F;
         var12 = (var12 - (float)MathHelper.truncateDoubleToInt((double)var12)) * 1.6F - 0.3F;

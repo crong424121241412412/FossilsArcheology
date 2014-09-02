@@ -39,7 +39,7 @@ public class RenderTerrorBird extends RenderLiving
 
     public void renderDodo(EntityTerrorBird entity, double par2, double par4, double par6, float par8, float par9)
     {
-        super.doRender(entity, par2, par4, par6, par8, par9);
+        super.doRenderLiving(entity, par2, par4, par6, par8, par9);
     }
     
     /**

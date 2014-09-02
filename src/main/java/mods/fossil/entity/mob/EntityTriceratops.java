@@ -13,6 +13,7 @@ import mods.fossil.fossilEnums.EnumDinoType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
@@ -39,6 +40,8 @@ public class EntityTriceratops extends EntityDinosaur
     public static final double maxHealth = EnumDinoType.Triceratops.HealthMax;
     public static final double maxDamage = EnumDinoType.Triceratops.StrengthMax;
     public static final double maxSpeed = EnumDinoType.Triceratops.SpeedMax;
+    
+    private final String texturePath;
 
     public EntityTriceratops(World var1)
     {
@@ -56,6 +59,8 @@ public class EntityTriceratops extends EntityDinosaur
         this.minSize = 1.0F;
         // Size of dinosaur at age Adult.
         this.maxSize = 8.0F;
+        
+        texturePath = Fossil.modid + ":textures/mob/" + this.SelfType.toString() + "/";
         
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -102,17 +107,14 @@ public class EntityTriceratops extends EntityDinosaur
         {
             switch (this.getSubSpecies())
             {
+                case 0: default:
+                    return texturePath + "Triceratops_Green_Adult.png";
+
                 case 1:
-                    return Fossil.modid + ":textures/mob/Triceratops_Adult_1.png";
+                    return texturePath + "Triceratops_Brown_Adult.png";
 
                 case 2:
-                    return Fossil.modid + ":textures/mob/Triceratops_Adult_2.png";
-
-                case 3:
-                    return Fossil.modid + ":textures/mob/Triceratops_Adult_3.png";
-
-                default:
-                    return Fossil.modid + ":textures/mob/Triceratops_Adult_1.png";
+                    return texturePath + "Triceratops_Grey_Adult.png";
             }
         }
 
@@ -120,33 +122,27 @@ public class EntityTriceratops extends EntityDinosaur
         {
             switch (this.getSubSpecies())
             {
+                case 0: default:
+                    return texturePath + "Triceratops_Green_Teen.png";
+
                 case 1:
-                    return Fossil.modid + ":textures/mob/Triceratops_Teen_1.png";
+                    return texturePath + "Triceratops_Brown_Teen.png";
 
                 case 2:
-                    return Fossil.modid + ":textures/mob/Triceratops_Teen_2.png";
-
-                case 3:
-                    return Fossil.modid + ":textures/mob/Triceratops_Teen_3.png";
-
-                default:
-                    return Fossil.modid + ":textures/mob/Triceratops_Teen_1.png";
+                    return texturePath + "Triceratops_Grey_Teen.png";
             }
         }
 
         switch (this.getSubSpecies())
         {
+            case 0: default:
+                return texturePath + "Triceratops_Green_Baby.png";
+
             case 1:
-                return Fossil.modid + ":textures/mob/Triceratops_Baby_1.png";
+                return texturePath + "Triceratops_Brown_Baby.png";
 
             case 2:
-                return Fossil.modid + ":textures/mob/Triceratops_Baby_2.png";
-
-            case 3:
-                return Fossil.modid + ":textures/mob/Triceratops_Baby_3.png";
-
-            default:
-                return Fossil.modid + ":textures/mob/Triceratops_Baby_1.png";
+                return texturePath + "Triceratops_Grey_Baby.png";
         }
     }
 
@@ -226,7 +222,7 @@ public class EntityTriceratops extends EntityDinosaur
 
     public float getMountHeight()
     {
-        return this.height*0.6F;
+    	return this.height*0.75F;
     }
     
     public void updateRiderPosition()
@@ -348,5 +344,17 @@ public class EntityTriceratops extends EntityDinosaur
 	            this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setAttribute(0.0D);
 	        }
     	}
+    }
+    
+    @Override
+    public EntityLivingData onSpawnWithEgg(EntityLivingData par1EntityLivingData)
+    {
+        par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
+        Random random = new Random();
+        this.setSubSpecies(random.nextInt(3));
+        this.setDinoAge(this.SelfType.AdultAge);
+        this.updateSize();
+        this.heal(200);
+        return par1EntityLivingData;
     }
 }

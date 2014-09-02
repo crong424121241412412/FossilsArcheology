@@ -47,7 +47,7 @@ public class BlockFossil extends BlockStone
 
         if (i < 13)
         {
-        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length);
         	if(dropRandom != 4)
         		this.randomMeta = dropRandom;
             return Fossil.legBone.itemID;
@@ -55,7 +55,7 @@ public class BlockFossil extends BlockStone
 
         if (i < 15)
         {
-        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length);
         	if(dropRandom != 4)
         		this.randomMeta = dropRandom;
             return Fossil.skull.itemID;
@@ -63,7 +63,7 @@ public class BlockFossil extends BlockStone
 
         if (i < 17)
         {
-        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length);
         	if(dropRandom != 4)
         		this.randomMeta = dropRandom;
             return Fossil.claw.itemID;
@@ -71,7 +71,7 @@ public class BlockFossil extends BlockStone
 
         if (i < 19)
         {
-        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length);
         	if(dropRandom != 4)
         		this.randomMeta = dropRandom;
             return Fossil.foot.itemID;
@@ -79,7 +79,7 @@ public class BlockFossil extends BlockStone
         
         if (i < 21)
         {
-        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length);
         	if(dropRandom != 4)
         		this.randomMeta = dropRandom;
             return Fossil.vertebrae.itemID;
@@ -87,7 +87,7 @@ public class BlockFossil extends BlockStone
         
         if (i < 23)
         {
-        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length);
         	if(dropRandom != 4)
         		this.randomMeta = dropRandom;
             return Fossil.armBone.itemID;
@@ -95,7 +95,7 @@ public class BlockFossil extends BlockStone
         
         if (i < 25)
         {
-        	int dropRandom = rand.nextInt(EnumDinoType.values().length)+1;
+        	int dropRandom = rand.nextInt(EnumDinoType.values().length);
         	if(dropRandom != 4)
         		this.randomMeta = dropRandom;
             return Fossil.dinoRibCage.itemID;
