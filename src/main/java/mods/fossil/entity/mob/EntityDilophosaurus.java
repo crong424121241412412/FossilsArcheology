@@ -399,7 +399,6 @@ public class EntityDilophosaurus extends EntityDinosaur
                     this.setOwner("");
                     this.ItemInMouth = null;
                     this.setAngry(true);
-                    this.setTarget((EntityLiving)attackingEntity);
                     this.PreyChecked = true;
                     var4 = true;
                 }

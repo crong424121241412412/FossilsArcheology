@@ -202,7 +202,7 @@ import cpw.mods.fml.relauncher.Side;
 public class Fossil
 {
     public static final String modid = "fossil";
-    public static final String modversion = "1.6.4 Build 6.4";
+    public static final String modversion = "1.6.4 Build 6.4.1b1";
 
     /*
      * Set mod state here
@@ -1208,6 +1208,108 @@ public class Fossil
         GameRegistry.registerBlock(vaseVoluteBlock, BlockVaseVoluteItem.class, modid + (vaseVoluteBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(vaseAmphoraBlock, BlockVaseAmphoraItem.class, modid + (vaseAmphoraBlock.getUnlocalizedName().substring(5)));
         GameRegistry.registerBlock(vaseKylixBlock, BlockVaseKylixItem.class, modid + (vaseKylixBlock.getUnlocalizedName().substring(5)));
+        
+        //Item Registry
+      GameRegistry.registerItem(biofossil, LocalizationStrings.BIO_FOSSIL_NAME);
+      GameRegistry.registerItem(relic, LocalizationStrings.RELIC_NAME);
+      GameRegistry.registerItem(stoneboard, LocalizationStrings.TABLET_NAME);
+      GameRegistry.registerItem(ancientSword, LocalizationStrings.ANCIENT_SWORD_NAME); 
+      GameRegistry.registerItem(brokenSword, LocalizationStrings.BROKEN_SWORD_NAME);
+      GameRegistry.registerItem(fernSeed, LocalizationStrings.FERNSEED_NAME);
+      GameRegistry.registerItem(ancienthelmet, LocalizationStrings.ANCIENT_HELMET_NAME);
+      GameRegistry.registerItem(brokenhelmet, LocalizationStrings.BROKEN_HELMET_NAME);
+      GameRegistry.registerItem(skullStick, LocalizationStrings.SKULL_STICK_NAME);
+      GameRegistry.registerItem(gem, LocalizationStrings.SCARAB_GEM_NAME);
+      GameRegistry.registerItem(gemAxe, LocalizationStrings.SCARAB_AXE_NAME);
+      GameRegistry.registerItem(gemPickaxe, LocalizationStrings.SCARAB_PICKAXE_NAME);
+      GameRegistry.registerItem(gemSword, LocalizationStrings.SCARAB_SWORD_NAME);
+      GameRegistry.registerItem(gemHoe, LocalizationStrings.SCARAB_HOE_NAME); 
+      GameRegistry.registerItem(gemShovel, LocalizationStrings.SCARAB_SHOVEL_NAME);
+      GameRegistry.registerItem(dinoPedia, LocalizationStrings.DINOPEDIA_NAME);
+      GameRegistry.registerItem(emptyShell, LocalizationStrings.EMPTY_SHELL_NAME);
+      GameRegistry.registerItem(magicConch, LocalizationStrings.MAGIC_CONCH_NAME);
+      GameRegistry.registerItem(icedMeat, LocalizationStrings.ICED_MEAT_NAME);
+      GameRegistry.registerItem(amber, LocalizationStrings.AMBER_NAME);
+      GameRegistry.registerItem(woodjavelin, LocalizationStrings.WOOD_JAVELIN_NAME);
+      GameRegistry.registerItem(stonejavelin, LocalizationStrings.STONE_JAVELIN_NAME);
+      GameRegistry.registerItem(ironjavelin, LocalizationStrings.IRON_JAVELIN_NAME);
+      GameRegistry.registerItem(goldjavelin, LocalizationStrings.GOLD_JAVELIN_NAME);
+      GameRegistry.registerItem(diamondjavelin, LocalizationStrings.DIAMOND_JAVELIN_NAME);
+      GameRegistry.registerItem(ancientJavelin, LocalizationStrings.ANCIENT_JAVELIN_NAME);
+		GameRegistry.registerItem(whip, LocalizationStrings.WHIP_NAME);
+		GameRegistry.registerItem(legBone, LocalizationStrings.LEGBONE_NAME);
+		GameRegistry.registerItem(claw, LocalizationStrings.CLAW_NAME);
+		GameRegistry.registerItem(foot, LocalizationStrings.FOOT_NAME);
+		GameRegistry.registerItem(skull, LocalizationStrings.SKULL_NAME);
+		GameRegistry.registerItem(vertebrae, LocalizationStrings.VERTEBRAE_NAME);
+		GameRegistry.registerItem(armBone, LocalizationStrings.ARM_BONE_NAME);
+		GameRegistry.registerItem(dinoRibCage, LocalizationStrings.DINO_RIB_CAGE_NAME);
+		//GameRegistry.registerItem(dinosaurModels, LocalizationStrings.DINOSAUR_MODELS);
+		GameRegistry.registerItem(brokenSapling, LocalizationStrings.BROKEN_SAPLING_NAME);
+		GameRegistry.registerItem(dodoEgg, LocalizationStrings.DODO_EGG_NAME);
+		GameRegistry.registerItem(cultivatedDodoEgg, LocalizationStrings.CULTIVATED_DODO_EGG_NAME);
+//		GameRegistry.registerItem(archNotebook, LocalizationStrings.ARCH_NOTEBOOK_NAME);
+		GameRegistry.registerItem(potteryShards, LocalizationStrings.POTTERY_SHARDS);
+//		GameRegistry.registerItem(brokenHeadRelic, LocalizationStrings.BROKEN_HEAD_RELIC);
+		GameRegistry.registerItem(skullHelmet, LocalizationStrings.SKULL_HELMET_NAME);
+		GameRegistry.registerItem(ribCage, LocalizationStrings.RIBCAGE_NAME);
+		GameRegistry.registerItem(femurs, LocalizationStrings.FEMURS_NAME);
+		GameRegistry.registerItem(feet, LocalizationStrings.FEET_NAME);
+		GameRegistry.registerItem(dnaPig, LocalizationStrings.DNA_PIG_NAME);
+		GameRegistry.registerItem(dnaSheep, LocalizationStrings.DNA_SHEEP_NAME);
+		GameRegistry.registerItem(dnaCow, LocalizationStrings.DNA_COW_NAME);
+		GameRegistry.registerItem(dnaHorse, LocalizationStrings.DNA_HORSE_NAME);
+		GameRegistry.registerItem(dnaQuagga, LocalizationStrings.DNA_QUAGGA_NAME);
+		GameRegistry.registerItem(dnaChicken, LocalizationStrings.DNA_CHICKEN_NAME);
+		GameRegistry.registerItem(dnaSmilodon, LocalizationStrings.DNA_SMILODON_NAME);
+		GameRegistry.registerItem(dnaMammoth, LocalizationStrings.DNA_MAMMOTH_NAME);
+		GameRegistry.registerItem(dnaCoelacanth, LocalizationStrings.DNA_COELACANTH_NAME);
+		GameRegistry.registerItem(dnaDodo, LocalizationStrings.DNA_DODO_NAME);
+		GameRegistry.registerItem(dnaTerrorBird, LocalizationStrings.DNA_TERROR_BIRD_NAME);
+		GameRegistry.registerItem(embryoPig, LocalizationStrings.EMBRYO_PIG_NAME);
+		GameRegistry.registerItem(embryoSheep, LocalizationStrings.EMBRYO_SHEEP_NAME);
+		GameRegistry.registerItem(embryoCow, LocalizationStrings.EMBRYO_COW_NAME);
+		GameRegistry.registerItem(embryoHorse, LocalizationStrings.EMBRYO_HORSE_NAME);
+		GameRegistry.registerItem(embryoQuagga, LocalizationStrings.EMBRYO_QUAGGA_NAME);
+		GameRegistry.registerItem(embryoChicken, LocalizationStrings.EMBRYO_CHICKEN_NAME);
+		GameRegistry.registerItem(embryoSmilodon, LocalizationStrings.EMBRYO_SMILODON_NAME);
+		GameRegistry.registerItem(embryoMammoth, LocalizationStrings.EMBRYO_MAMMOTH_NAME);
+		GameRegistry.registerItem(cookedDinoMeat, LocalizationStrings.DINO_STEAK_NAME);
+		GameRegistry.registerItem(cookedChickenSoup, LocalizationStrings.COOKED_CHICKEN_SOUP_NAME);
+		GameRegistry.registerItem(rawChickenSoup, LocalizationStrings.RAW_CHICKEN_SOUP_NAME);
+		GameRegistry.registerItem(chickenEss, LocalizationStrings.EOC_NAME);
+		GameRegistry.registerItem(sjl, LocalizationStrings.SJL_NAME);
+		GameRegistry.registerItem(dodoWing, LocalizationStrings.DODO_WING_NAME);
+		GameRegistry.registerItem(dodoWingCooked, LocalizationStrings.DODO_WING_COOKED_NAME);
+//		GameRegistry.registerItem(figurineItem, LocalizationStrings.FIGURINE_NAME);
+		GameRegistry.registerItem(fossilrecordBones, LocalizationStrings.FOSSILRECORD_NAME);
+		GameRegistry.registerItem(livingCoelacanth, LocalizationStrings.LIVING_COELACANTH_NAME);
+		GameRegistry.registerItem(terrorBirdEgg, LocalizationStrings.TERROR_BIRD_EGG_NAME);
+		GameRegistry.registerItem(cultivatedTerrorBirdEgg, LocalizationStrings.CULTIVATED_TERROR_BIRD_EGG_NAME);
+		GameRegistry.registerItem(terrorBirdMeat, LocalizationStrings.TERROR_BIRD_MEAT);
+		GameRegistry.registerItem(terrorBirdMeatCooked, LocalizationStrings.TERROR_BIRD_MEAT_COOKED);
+		GameRegistry.registerItem(quaggaMeat,LocalizationStrings.QUAGGA_MEAT);
+		GameRegistry.registerItem(quaggaMeatCooked,LocalizationStrings.QUAGGA_MEAT_COOKED);
+
+	
+		
+		//Dinosaur Eggs
+        for (int i = 0; i < EnumDinoType.values().length; i++)
+        {
+        	GameRegistry.registerItem(EnumDinoType.values()[i].EggItem, "egg" + EnumDinoType.values()[i].name());
+        }
+
+        //Dinosaur DNA
+        for (int i = 0; i < EnumDinoType.values().length; i++)
+        {
+        	GameRegistry.registerItem(EnumDinoType.values()[i].DNAItem, "dna" + EnumDinoType.values()[i].name());
+        }
+
+        //Dinosaur Meat
+        for (int i = 0; i < EnumDinoType.values().length; i++)
+        {
+        	GameRegistry.registerItem(EnumDinoType.values()[i].DropItem, "raw" + EnumDinoType.values()[i].name());
+        }  
         
         EntityRegistry.registerModEntity(EntityStoneboard.class, 			"StoneBoard", 			1, this, 250, Integer.MAX_VALUE, false);
         EntityRegistry.registerModEntity(EntityJavelin.class, 				"Javelin", 				2, this, 250, 5, true);

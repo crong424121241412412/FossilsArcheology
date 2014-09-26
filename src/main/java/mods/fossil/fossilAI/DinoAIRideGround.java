@@ -64,7 +64,7 @@ public class DinoAIRideGround extends DinoAIRide
     	if ( hasEquipped(rider, Fossil.whip) )
     		this.lastTimeSeenWhip=0;
 
-    	return this.lastTimeSeenWhip != -1;
+    	return this.lastTimeSeenWhip != -1 && this.dinosaur.riddenByEntity != null;
     	
     }
 
