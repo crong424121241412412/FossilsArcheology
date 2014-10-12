@@ -306,12 +306,12 @@ public class EntityPachycephalosaurus extends EntityDinosaur
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-/*
+
         if (this.attackTimer > 0)
         {
             --this.attackTimer;
         }
-*/
+
     }
     
     @SideOnly(Side.CLIENT)
